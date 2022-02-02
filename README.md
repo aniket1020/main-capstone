@@ -1,4 +1,4 @@
 ## Capstone project
 ### Setup
-- use `yarn install` for `client`
-- use `npm install` for `server`
+- use `npm install` for `server` and `client`
+- use `npm start` to start `server` or `client`
