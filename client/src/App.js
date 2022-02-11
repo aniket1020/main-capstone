@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/userProfile' element={<UserProfile />} />
+        <Route exact path='/userProfile' element={<UserProfile />} />
       </Routes>
     </div>
   );
