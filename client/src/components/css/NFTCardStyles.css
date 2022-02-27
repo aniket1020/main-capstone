@@ -1,4 +1,12 @@
 /* NFT cards */
+
+/* 
+    Main :
+        Border Color : rgb(226, 115, 24)
+        Title / Text Color : rgb(255, 255, 255, 0.75)
+        Sub Title Color : rgba(215, 215, 215, 0.5)
+*/
+
 .userItemSection
 {
     min-height: 100px;
@@ -22,7 +30,7 @@
 {
     margin-top: 25px;
     border-radius: 2px;
-    color: white;
+    color: rgb(255, 255, 255, 0.75);
     border: 1.5px solid black;
     display: flex;
 }
@@ -121,7 +129,7 @@
 .loadMoreButton:hover
 {
     background: linear-gradient(to right, rgb(226, 115, 24) 0%, rgb(253, 51, 0) 100%);
-    -webkit-text-fill-color: white;
+    -webkit-text-fill-color: rgb(255, 255, 255, 0.75);
     border: 1px solid rgb(0, 0, 0);
     cursor: pointer;
 }

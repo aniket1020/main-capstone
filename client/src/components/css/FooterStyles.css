@@ -1,3 +1,9 @@
+/* 
+    Main :
+        Border Color : rgb(226, 115, 24)
+        Title Color : rgb(255, 255, 255, 0.75)
+*/
+
 .footerSection
 {
     width: 100%;
@@ -26,7 +32,7 @@
 {
     cursor: pointer;
     margin-top: 5px;
-    color: white;
+    color: rgb(255, 255, 255, 0.75);
     font-size: medium;
 }
 
@@ -62,7 +68,7 @@
     width: 100%;
     border: 0;
     padding: 10px;
-    color: white;
+    color: rgb(255, 255, 255, 0.75);
     margin-top: 20px;
     border-radius: 4px;
     background-color: rgb(37, 37, 37);
@@ -74,7 +80,7 @@
     width: 100%;
     background: rgb(226, 115, 24);
     background: linear-gradient(130deg, rgb(226, 115, 24) 0%, rgb(194, 58, 13) 100%);
-    color: white;
+    color: rgb(255, 255, 255, 0.75);
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
