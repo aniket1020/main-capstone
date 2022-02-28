@@ -132,6 +132,25 @@
     color: rgb(226, 115, 24);
 }
 
+.userItemSection
+{
+    min-height: 100px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.userItemCollection
+{
+    width: 75%;
+    min-height: 80px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+}
+
 @media only screen and (max-width: 950px) 
 {
     .profileId
