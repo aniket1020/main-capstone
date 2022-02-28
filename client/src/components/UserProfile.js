@@ -14,7 +14,7 @@ const HeartSvg = () => (
   );
 
 const HeartIcon = props => <Icon component={HeartSvg} 
-onClick={(e) => e.target.style.color = e.target.style.color == 'gray'?'hotpink':'gray'} {...props} />;
+onClick={(e) => e.target.style.color = e.target.style.color === 'gray'?'hotpink':'gray'} {...props} />;
 
 const card = (
     <div className='userItemCard'>
@@ -67,7 +67,7 @@ function Home()
             {/* Only the profile background */}
             <div className='profileBackground'>
                 <img className='profileBackgroundImage' 
-                    src={require('./images/backgroundUserProfileImage.jpeg')}
+                    src={ profileBackgroundImage !== null ? profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
                     alt='no image'/>
             </div>
             {/* Profile user settings */}
@@ -78,14 +78,22 @@ function Home()
                         roundedCircle
                         height={160}
                         width={160}
-                        src={require('./images/profileDefault.png')}
+                        src={profileImage !== null ? profileImage : require('./images/profileDefault.png')}
                         alt='no image'
                     />
-                    <div className='profileName'><strong>Angelina AK</strong></div>
-                    <div className='profileUserName'>@ang_el</div>
+                    <div className='profileName'>
+                        <strong>
+                            {profileName !== null ? profileName : <i>No Name Set</i>}
+                        </strong>
+                    </div>
+                    <div className='profileUserName'>
+                            {userName !== null ? "@"+userName : <i>No Username Set</i>}
+                    </div>
                 </div>
                 <div className='profileUserSettings'>
-                    <div className='walletAddress'>0xe3F77F24c65Baecb4EA0409895718F190a2ccbaD</div>
+                    <div className='walletAddress'>
+                        {walletAddress !== null ? walletAddress : <i>No wallet address</i>}
+                    </div>
                     <div className='id-copy'><CopyOutlined /></div>
                     <div className='id-btn editProfileBtn'><EditOutlined style={{fontSize:"16.5px"}}/>&nbsp; Edit Profile</div>
                     <div className='id-btn settingsBtn'><SettingOutlined style={{fontSize:"16.5px"}}/>&nbsp; Settings</div>

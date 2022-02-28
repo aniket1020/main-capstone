@@ -18,7 +18,7 @@ function NavBar()
                     <div className='nv-link'><a href='#'>Feed</a></div>
 
                     <div className="connect-wallet btn-custom">
-                        <div className='connect-wallet-content'>{walletAddress != null ? String(walletAddress) : "Connect Wallet"}</div>
+                        <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@ function NavBar()
                         <div className='nv-link'><a href='#'>Feed</a></div>
 
                         <div className="connect-wallet btn-custom">
-                            <div className='connect-wallet-content'>{walletAddress != null ? String(walletAddress) : "Connect Wallet"}</div>
+                            <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
                         </div>
                     </Menu>
                 </div>
