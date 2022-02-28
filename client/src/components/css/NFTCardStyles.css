@@ -7,25 +7,6 @@
         Sub Title Color : rgba(215, 215, 215, 0.5)
 */
 
-.userItemSection
-{
-    min-height: 100px;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.userItemCollection
-{
-    width: 75%;
-    min-height: 80px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-flow: row wrap;
-}
-
 .userItem
 {
     margin-top: 25px;
