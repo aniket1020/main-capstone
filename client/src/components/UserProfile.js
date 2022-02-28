@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './css/UserProfile.css'
-import './css/NFTCardStyles.css'
 import NavBar from './NavBar'
 import Footer from './Footer'
+import Card from './Card'
 
 import Image from 'react-bootstrap/Image'
 import Icon,{CopyOutlined, EditOutlined, SettingOutlined} from '@ant-design/icons'
@@ -103,36 +103,6 @@ const cards = {
     },
 };
 
-function userItemCardBuilder(cardItem)
-{
-    return <div className='userItemCard'>
-        <img className='cardMedia' src={cardItem.src}/>
-        <div className='cardContent'>
-            <HeartIcon className='heartIcon'/>
-            <div className='cardRow'>
-                <div className='cardTitle'>{cardItem.title}</div>
-                <div className='cardTags'>
-                    {Object.keys(cardItem.tags).map(tag => <div key={tag} className='cardTag'>{cardItem.tags[tag]}</div>)}
-                </div>
-            </div>
-            <div className='cardRow'>
-                <div className='cardSubTitle'>Price</div>
-            </div>
-            <div className='cardRow'>
-                <div className='cardPrice'>{cardItem.price} ETH</div>
-            </div>
-            <div className='cardRow'>
-                <div className='cardSubTitle'>Created by</div>
-                <div className='cardSubTitle'>Owner</div>
-            </div>
-            <div className='cardRow'>
-                <div className='cardText'>@{cardItem.created}</div>
-                <div className='cardText'>@{cardItem.owner}</div>
-            </div>
-        </div>
-    </div>
-}
-
 function UserProfile()
 {
     const [profileBackgroundImage, setBackgroundImage]  = useState(null);
@@ -148,10 +118,16 @@ function UserProfile()
         setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
     }
 
-    const userCards = Object.keys(cards).slice(0,visibleCards).map(key => 
-                            <div key={key} className='userItem'>
-                                {userItemCardBuilder(cards[key])}
-                            </div>
+    const userCards = Object.keys(cards).slice(0,visibleCards).map(key =>
+                            <Card 
+                                src={cards[key].src}            // For media src
+                                title={cards[key].title}        // NFTCard title
+                                tags={cards[key].tags}          // NFTCard tags
+                                price={cards[key].price}        // NFTCard Price
+                                created={cards[key].created}    // Creator
+                                owner={cards[key].owner}        // Owner
+                                key={key}                       // Unique key Id
+                            />
                         );
 
     return (
