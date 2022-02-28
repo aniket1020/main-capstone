@@ -16,43 +16,49 @@ const HeartSvg = () => (
 const HeartIcon = props => <Icon component={HeartSvg} 
 onClick={(e) => e.target.style.color = e.target.style.color === 'gray'?'hotpink':'gray'} {...props} />;
 
-const card = (
-    <div className='userItemCard'>
-        <img className='cardMedia' src='https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'/>
+// Temp JSON object for NFT cards
+const cards = {
+    0:{
+        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+          , title:'NFT Monkeys'
+          , tags:{0:'3D',1:'ART',2:'AUDIO'}
+          , price:4
+          , created:'sanya'
+          , owner:'vijaypatil'
+    }
+};
+
+function userItemCardBuilder(cardItem)
+{
+    return <div className='userItemCard'>
+        <img className='cardMedia' src={cardItem.src}/>
         <div className='cardContent'>
             <HeartIcon className='heartIcon'/>
             <div className='cardRow'>
-                <div className='cardTitle'>NFT Monkeys</div>
+                <div className='cardTitle'>{cardItem.title}</div>
                 <div className='cardTags'>
-                    <div className='cardTag'>3D</div>
-                    <div className='cardTag'>ART</div>
-                    <div className='cardTag'>AUDIO</div>
+                    {Object.keys(cardItem.tags).map(tag => <div key={tag} className='cardTag'>{cardItem.tags[tag]}</div>)}
                 </div>
             </div>
             <div className='cardRow'>
                 <div className='cardSubTitle'>Price</div>
             </div>
             <div className='cardRow'>
-                <div className='cardPrice'>4 ETH</div>
+                <div className='cardPrice'>{cardItem.price} ETH</div>
             </div>
             <div className='cardRow'>
                 <div className='cardSubTitle'>Created by</div>
                 <div className='cardSubTitle'>Owner</div>
             </div>
             <div className='cardRow'>
-                <div className='cardText'>@sanya</div>
-                <div className='cardText'>@vijaypatil</div>
+                <div className='cardText'>@{cardItem.created}</div>
+                <div className='cardText'>@{cardItem.owner}</div>
             </div>
         </div>
     </div>
-);
-
-function userItemCardBuilder()
-{
-    return <>{card}</>
 }
 
-function Home()
+function UserProfile()
 {
 
     const [profileBackgroundImage, setBackgroundImage]  = useState(null);
@@ -111,9 +117,11 @@ function Home()
             <div className='userItemSection'>
                 <div className='userItemCollection'>
                     {/* User item collection */}
-                    <div className='userItem'>
-                        {userItemCardBuilder()}
-                    </div>
+                    {Object.keys(cards).map(key => 
+                        <div key={key} className='userItem'>
+                            {userItemCardBuilder(cards[key])}
+                        </div>
+                    )}
                 </div>
                 <div className='loadMore'>
                     <div className='loadMoreButton'>
@@ -126,4 +134,4 @@ function Home()
         )
 }
 
-export default Home;
+export default UserProfile;
