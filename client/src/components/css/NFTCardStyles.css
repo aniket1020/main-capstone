@@ -55,6 +55,12 @@
     object-fit: cover;
 }
 
+.heartIcon
+{
+    font-size: 20px;
+    color: gray;
+}
+
 .cardTitle
 {
     color: rgba(255, 255, 255, 0.75);
