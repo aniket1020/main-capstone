@@ -12,86 +12,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 // Temp JSON object for NFT cards
 const cards = {
-    0:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    1:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    2:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    3:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    4:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    5:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    6:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    7:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    8:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    9:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
+    
 };
 
 function UserProfile()
@@ -104,9 +25,18 @@ function UserProfile()
 
     const [visibleCards, setVisibleCards] = useState(4);
 
+    const totalCardsSize = Object.keys(cards).length;
+    const isCardsListEmpty = totalCardsSize === 0 ? true : false;
+    const [loadMoreVisible, setLoadMoreVisible] = useState(totalCardsSize <= 4 ? false : true);
+
     const addUserCards = () =>
     {
         setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
+
+        if(visibleCards >= totalCardsSize)
+        {
+            setLoadMoreVisible(false);
+        }
     }
 
     const userCards = Object.keys(cards).slice(0,visibleCards).map(key =>
@@ -202,12 +132,18 @@ function UserProfile()
             <div className='userItemSection'>
                 <div className='userItemCollection'>
                     {/* User item collection */}
-                    {userCards}
+                    { isCardsListEmpty ?
+                        <div style={{color:"gray", paddingTop:"40px"}}> 😩 No NFTs available</div>
+                        :    userCards
+                    }
                 </div>
                 <div className='loadMore'>
-                    <div className='loadMoreButton' onClick={() => addUserCards()}>
-                        Load More
-                    </div>
+                    { loadMoreVisible ?  
+                        <div className='loadMoreButton' onClick={() => addUserCards()}>
+                            Load More
+                        </div>
+                        : <></>
+                    }
                 </div>
             </div>
             <Footer />
