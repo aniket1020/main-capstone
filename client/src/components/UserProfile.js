@@ -12,7 +12,62 @@ import 'react-toastify/dist/ReactToastify.css'
 
 // Temp JSON object for NFT cards
 const cards = {
-    
+    0:{
+        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+          , title:'NFT Monkeys'
+          , tags:{0:'3D',1:'ART',2:'AUDIO'}
+          , price:4
+          , created:'sanya'
+          , owner:'vijaypatil'
+    },
+    1:{
+        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+          , title:'NFT Monkeys'
+          , tags:{0:'3D',1:'ART',2:'AUDIO'}
+          , price:4
+          , created:'sanya'
+          , owner:'vijaypatil'
+    },
+    2:{
+        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+          , title:'NFT Monkeys'
+          , tags:{0:'3D',1:'ART',2:'AUDIO'}
+          , price:4
+          , created:'sanya'
+          , owner:'vijaypatil'
+    },
+    3:{
+        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+          , title:'NFT Monkeys'
+          , tags:{0:'3D',1:'ART',2:'AUDIO'}
+          , price:4
+          , created:'sanya'
+          , owner:'vijaypatil'
+    },
+    4:{
+        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+          , title:'NFT Monkeys'
+          , tags:{0:'3D',1:'ART',2:'AUDIO'}
+          , price:4
+          , created:'sanya'
+          , owner:'vijaypatil'
+    },
+    5:{
+        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+          , title:'NFT Monkeys'
+          , tags:{0:'3D',1:'ART',2:'AUDIO'}
+          , price:4
+          , created:'sanya'
+          , owner:'vijaypatil'
+    },
+    6:{
+        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+          , title:'NFT Monkeys'
+          , tags:{0:'3D',1:'ART',2:'AUDIO'}
+          , price:4
+          , created:'sanya'
+          , owner:'vijaypatil'
+    },
 };
 
 function UserProfile()
