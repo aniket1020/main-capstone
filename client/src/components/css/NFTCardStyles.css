@@ -7,116 +7,108 @@
         Sub Title Color : rgba(215, 215, 215, 0.5)
 */
 
-.userItem
-{
-    margin-top: 25px;
-    border-radius: 2px;
-    color: rgb(255, 255, 255, 0.75);
-    border: 1.5px solid black;
-    display: flex;
+.userItem {
+  margin-top: 25px;
+  border-radius: 2px;
+  color: rgb(255, 255, 255, 0.75);
+  border: 1.5px solid black;
+  display: flex;
 }
 
-.userItem:hover
-{
-    border: 1.5px solid rgba(255, 123, 0, 0.76);
-    cursor: pointer;
+.userItem:hover {
+  border: 1.5px solid rgba(255, 123, 0, 0.76);
+  cursor: pointer;
 }
 
-.userItemCard
-{
-    background-color: black;
+.userItemCard {
+  background-color: black;
 }
 
-.cardMedia
-{
-    border-radius: 20px;
-    width: 250px;
-    height: 250px;
-    padding: 5px;
-    object-fit: cover;
+.cardMedia {
+  border-radius: 20px;
+  width: 250px;
+  height: 250px;
+  padding: 5px;
+  object-fit: cover;
 }
 
-.heartIcon
-{
-    font-size: 20px;
-    color: gray;
+.heartIcon {
+  font-size: 20px;
+  color: gray;
 }
 
-.cardTitle
-{
-    color: rgba(255, 255, 255, 0.75);
-    font-size: medium;
+.cardTitle {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: medium;
 }
 
-.cardTags
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+.cardTags {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-.cardTag
-{
-    background-color: rgba(226, 115, 24, 0.178);
-    color: rgb(226, 115, 24);
-    font-size: small;
-    padding: 4px;
-    border-radius: 4px;
-    margin-right: 5px;
+.cardTag {
+  background-color: rgba(226, 115, 24, 0.178);
+  color: rgb(226, 115, 24);
+  font-size: small;
+  padding: 4px;
+  border-radius: 4px;
+  margin-right: 5px;
 }
 
-.cardSubTitle
-{
-    font-size: smaller;
-    color: rgba(215, 215, 215, 0.5);
+.cardSubTitle {
+  font-size: smaller;
+  color: rgba(215, 215, 215, 0.5);
 }
 
-.cardContent
-{
-    padding: 10px;
+.cardContent {
+  padding: 10px;
 }
 
-.cardRow
-{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 0px 5px 0px;
+.cardRow {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0px 5px 0px;
 }
 
-.cardPrice
-{
-    font-size: small;
+.cardPrice {
+  font-size: small;
 }
 
-.cardText
-{
-    font-size: small;
+.cardText {
+  font-size: small;
 }
 
-.loadMore
-{
-    margin: 30px 0px 30px 0px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+.loadMore {
+  margin: 30px 0px 30px 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.loadMoreButton
-{
-    background: linear-gradient(130deg, rgb(226, 115, 24) 0%, rgb(253, 51, 0) 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-    font-size: small;
-    padding: 10px 30px 10px 30px;
-    border-radius: 5px;
-    border: 1px solid rgb(226, 115, 24);
+.loadMoreButton {
+  background: linear-gradient(
+    130deg,
+    rgb(226, 115, 24) 0%,
+    rgb(253, 51, 0) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: small;
+  padding: 10px 30px 10px 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(226, 115, 24);
 }
 
-.loadMoreButton:hover
-{
-    background: linear-gradient(to right, rgb(226, 115, 24) 0%, rgb(253, 51, 0) 100%);
-    -webkit-text-fill-color: rgb(255, 255, 255, 0.75);
-    border: 1px solid rgb(0, 0, 0);
-    cursor: pointer;
+.loadMoreButton:hover {
+  background: linear-gradient(
+    to right,
+    rgb(226, 115, 24) 0%,
+    rgb(253, 51, 0) 100%
+  );
+  -webkit-text-fill-color: rgb(255, 255, 255, 0.75);
+  border: 1px solid rgb(0, 0, 0);
+  cursor: pointer;
 }

@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css'
 // Temp JSON object for NFT cards
 const cards = {
     0:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+        'src':'https://image.binance.vision/editor-uploads-original/9c15d9647b9643dfbc5e522299d13593.png'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
           , price:4
@@ -21,7 +21,7 @@ const cards = {
           , owner:'vijaypatil'
     },
     1:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+        'src':'https://image.binance.vision/editor-uploads-original/9c15d9647b9643dfbc5e522299d13593.png'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
           , price:4
@@ -29,7 +29,7 @@ const cards = {
           , owner:'vijaypatil'
     },
     2:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+        'src':'https://image.binance.vision/editor-uploads-original/9c15d9647b9643dfbc5e522299d13593.png'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
           , price:4
@@ -37,7 +37,7 @@ const cards = {
           , owner:'vijaypatil'
     },
     3:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+        'src':'https://image.binance.vision/editor-uploads-original/9c15d9647b9643dfbc5e522299d13593.png'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
           , price:4
@@ -45,7 +45,7 @@ const cards = {
           , owner:'vijaypatil'
     },
     4:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+        'src':'https://image.binance.vision/editor-uploads-original/9c15d9647b9643dfbc5e522299d13593.png'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
           , price:4
@@ -53,7 +53,7 @@ const cards = {
           , owner:'vijaypatil'
     },
     5:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+        'src':'https://image.binance.vision/editor-uploads-original/9c15d9647b9643dfbc5e522299d13593.png'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
           , price:4
@@ -61,7 +61,7 @@ const cards = {
           , owner:'vijaypatil'
     },
     6:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+        'src':'https://image.binance.vision/editor-uploads-original/9c15d9647b9643dfbc5e522299d13593.png'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
           , price:4
@@ -69,7 +69,7 @@ const cards = {
           , owner:'vijaypatil'
     },
     7:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
+        'src':'https://image.binance.vision/editor-uploads-original/9c15d9647b9643dfbc5e522299d13593.png'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
           , price:4
