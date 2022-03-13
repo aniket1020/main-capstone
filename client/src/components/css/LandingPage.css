@@ -88,3 +88,88 @@ a:hover {
   border: 1px solid white;
   margin-right: 30px;
 }
+
+.auction-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: -45px;
+}
+
+.landing-auctions {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 265px;
+  margin-right: 100px;
+}
+
+.landing-auctions__text > p {
+  color: rgb(226, 115, 24);
+}
+
+.landing-auctions__text > h3 {
+  color: white;
+}
+
+.trending-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: -45px;
+}
+
+.landing-trending {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 265px;
+  margin-right: 100px;
+}
+
+.landing-trending > p {
+  color: rgb(226, 115, 24);
+}
+
+.landing-trending > h3 {
+  color: white;
+}
+
+.steps-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: -2px;
+}
+
+.landing-steps {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 265px;
+  margin-right: 100px;
+  margin-bottom: 100px;
+}
+
+.landing-steps > p {
+  color: rgb(226, 115, 24);
+}
+
+.landing-steps > h3 {
+  color: white;
+}
+
+.steps-cards__indi {
+  margin-top: 30px;
+  margin-right: 25px;
+  background-color: #16161d;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+  border-radius: 2%;
+}
+
+.steps-cards__indi > h4 {
+  font-size: 18px;
+  margin-top: 10px;
+  color: white;
+}
+
+.steps-cards__indi > p {
+  font-size: 12px;
+  color: #767676;
+}
