@@ -99,10 +99,17 @@ function Explore() {
 
     const [visibleCards, setVisibleCards] = useState(4);
 
+    const totalCardsSize = Object.keys(cards).length;
+    const [loadMoreVisible, setLoadMoreVisible] = useState(totalCardsSize <= 4 ? false : true);
 
     const addUserCards = () =>
     {
         setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
+
+        if(visibleCards >= totalCardsSize)
+        {
+            setLoadMoreVisible(false);
+        }
     }
 
     const userCards = Object.keys(cards).slice(0,visibleCards).map(key =>
@@ -144,9 +151,12 @@ function Explore() {
                     {userCards}
                 </div>
                 <div className='loadMore'>
-                    <div className='loadMoreButton' onClick={() => addUserCards()}>
-                        Load More
-                    </div>
+                    { loadMoreVisible ?  
+                        <div className='loadMoreButton' onClick={() => addUserCards()}>
+                            Load More
+                        </div>
+                        : <></>
+                    }
                 </div>
             </div>
 
