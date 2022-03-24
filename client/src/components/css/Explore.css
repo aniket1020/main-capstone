@@ -1,0 +1,72 @@
+.Header {
+  display: flex;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Header__row1 {
+  color: #f18a24;
+  font-size: small;
+  margin-top: 50px;
+}
+
+.Header__row2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.Header__row3 {
+  font-size: 11px;
+  padding-top: 20px;
+  margin-bottom: 50px;
+}
+
+.Header__row3 > span {
+  color: rgb(226, 115, 24);
+}
+
+.exploreItemSection {
+  min-height: 100px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.exploreItemCollection {
+  width: 75%;
+  min-height: 80px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+}
+
+.searchbar {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.searchbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0b0b0b;
+  color: white;
+}
+.searchbar > .searchbox > input {
+  color: white;
+  background-color: #0b0b0b;
+  border: 0px;
+  width: 200px;
+  font-size: small;
+  margin-left: 2px;
+}
+
+.searchbar > .searchbox > input:focus {
+  outline: none;
+}
