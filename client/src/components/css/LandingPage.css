@@ -1,0 +1,175 @@
+.landing {
+  background-color: black;
+}
+
+.landing-cover {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 50px;
+}
+
+.landing-cover-left {
+  color: white;
+  text-align: left;
+  margin-top: 50px;
+}
+
+.landing-cover-left > h1 {
+  font-size: 52px;
+}
+
+#alt-text {
+  color: rgb(226, 115, 24);
+  -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(226, 115, 24);
+}
+
+.landing-cover-left > p {
+  font-size: 14px;
+}
+
+.landing-cover__buttons {
+  margin-top: 25px !important;
+}
+
+.landing-cover__buttons > a {
+  text-decoration: none;
+  margin: 20px;
+  margin-left: -1px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid rgb(226, 115, 24);
+  color: rgb(226, 115, 24);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+#alt-button {
+  color: white;
+  background-color: rgb(226, 115, 24);
+}
+
+.landing-wallets {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 265px;
+}
+
+.landing-wallets > p {
+  color: rgb(226, 115, 24);
+}
+
+.landing-wallets > h3 {
+  color: white;
+}
+
+.landing-wallets__cards {
+  margin-top: 30px;
+  display: flex;
+}
+
+.wallet-img {
+  height: 100px;
+  width: 100px;
+}
+
+.wallet-card__text {
+  color: white;
+  margin-top: 15px;
+}
+
+.wallets-indi {
+  padding: 20px;
+  border: 1px solid white;
+  margin-right: 30px;
+}
+
+.auction-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: -45px;
+}
+
+.landing-auctions {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 265px;
+  margin-right: 100px;
+}
+
+.landing-auctions__text > p {
+  color: rgb(226, 115, 24);
+}
+
+.landing-auctions__text > h3 {
+  color: white;
+}
+
+.trending-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: -45px;
+}
+
+.landing-trending {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 265px;
+  margin-right: 100px;
+}
+
+.landing-trending > p {
+  color: rgb(226, 115, 24);
+}
+
+.landing-trending > h3 {
+  color: white;
+}
+
+.steps-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: -2px;
+}
+
+.landing-steps {
+  margin-top: 30px;
+  text-align: left;
+  margin-left: 265px;
+  margin-right: 100px;
+  margin-bottom: 100px;
+}
+
+.landing-steps > p {
+  color: rgb(226, 115, 24);
+}
+
+.landing-steps > h3 {
+  color: white;
+}
+
+.steps-cards__indi {
+  margin-top: 30px;
+  margin-right: 25px;
+  background-color: #16161d;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+  border-radius: 2%;
+}
+
+.steps-cards__indi > h4 {
+  font-size: 18px;
+  margin-top: 10px;
+  color: white;
+}
+
+.steps-cards__indi > p {
+  font-size: 12px;
+  color: #767676;
+}
