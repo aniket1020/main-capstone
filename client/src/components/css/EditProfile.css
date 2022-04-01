@@ -1,0 +1,208 @@
+.profileBackground
+{
+    height: 280px;
+    background-color: black;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.profileBackgroundImage
+{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    opacity: 0.25;
+    top: 0px;
+    left: 0px;
+}
+
+#editProfileBackground
+{
+    z-index: 2;
+    position: absolute;
+    height: 50px;
+    top: 100px;
+}
+
+#editProfileBackground:hover
+{
+    cursor: pointer;
+    border-radius: 25px;
+    border: rgba(128, 128, 128, 0.5) 0px;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+.userDetails
+{
+    background-color: black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.profileImageCol
+{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.userProfileImage
+{
+    border: 2.5px solid rgb(226, 115, 24);
+    position: absolute;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+#editProfileImage
+{
+    z-index: 1;
+    position: absolute;
+    height: 50px;
+}
+
+#editProfileImage:hover
+{
+    cursor: pointer;
+    border-radius: 25px;
+    border: rgba(128, 128, 128, 0.5) 0px;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+.imageCol
+{
+    display: flex;
+    flex-direction: column;
+}
+  
+.editButton {
+    background: linear-gradient(
+        130deg,
+        rgb(226, 115, 24) 0%,
+        rgb(253, 51, 0) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 13px;
+    margin-top: 15px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(226, 115, 24);
+}
+  
+.editButton:hover {
+    background: linear-gradient(
+        to right,
+        rgb(226, 115, 24) 0%,
+        rgb(253, 51, 0) 100%
+    );
+    -webkit-text-fill-color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.userDetailsCol
+{
+    padding: 30px;
+    width: 60%;
+}
+
+.userDetailSectionHeader
+{
+    background-color: rgba(100, 100, 100, 0.25);
+    color: white;
+    text-align: left;
+    padding: 10px;
+    padding-left: 15px;
+    font-size: medium;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.userDetailSectionRow
+{
+    margin-bottom: 20px;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.userDetailSectionCol
+{
+    margin: 5px;
+    width: 50%;
+}
+
+.userDetailLabel
+{
+    margin: 5px;
+    float: left;
+    color: white;
+}
+
+.userDetailInput
+{
+    margin: 5px;
+}
+
+.userDetailInput > input
+{
+    float: left;
+    width: 95%;
+}
+
+.userDetailInputField
+{
+    width: 100%;
+    border: 0;
+    padding: 10px;
+    color: rgb(255, 255, 255, 0.75);
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: rgb(37, 37, 37);
+    outline: none;
+}
+
+.updateProfileSectionButton
+{
+    display: flex;
+    justify-content: end;
+    float: right;
+    width: 100%;
+}
+
+.updateProfileButton {
+    background: linear-gradient(
+        130deg,
+        rgb(226, 115, 24) 0%,
+        rgb(253, 51, 0) 100%
+    );
+    width: 25%;
+    float: right;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 13px;
+    margin-top: 15px;
+    margin-right: 30px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(226, 115, 24);
+}
+  
+.updateProfileButton:hover {
+    background: linear-gradient(
+        to right,
+        rgb(226, 115, 24) 0%,
+        rgb(253, 51, 0) 100%
+    );
+    -webkit-text-fill-color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
+    cursor: pointer;
+}
