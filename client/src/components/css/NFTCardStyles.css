@@ -13,6 +13,8 @@
   color: rgb(255, 255, 255, 0.75);
   border: 1.5px solid black;
   display: flex;
+  justify-content: center;
+  width: fit-content;
 }
 
 .userItem:hover {

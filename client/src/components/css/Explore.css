@@ -40,9 +40,13 @@
 .exploreItemCollection {
   width: 75%;
   min-height: 80px;
-  display: flex;
+  /* display: flex;
   justify-content: space-evenly;
-  flex-flow: row wrap;
+  flex-flow: row wrap; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
 }
 
 .searchbar {
