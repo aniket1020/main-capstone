@@ -32,6 +32,10 @@ try {
   console.log(error);
 }
 
+// Upload storage
+app.use(express.static(__dirname + '/public'));
+app.use('/uploads', express.static('public/uploads'));
+
 // Routes
 app.use('/', indexRouter);
 
