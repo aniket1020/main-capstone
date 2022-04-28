@@ -8,13 +8,13 @@ function Wallet()
 return (    
     <>
     <NavBar />
-    <div className='Header'>
-        <div className='Header__row1'>
+    <div className='Wallet__Header'>
+        <div className='Wallet__Header__row1'>
         | <br />
         Explore{/* #F18A24 */}
     </div>
-    <div className='Header__row2'>Connect Your Wallet</div>
-    <div className='Header__row3'> Home {'>'} <span>Wallet</span> </div>
+    <div className='Wallet__Header__row2'>Connect Your Wallet</div>
+    <div className='Wallet__Header__row3'> Home {'>'} <span>Wallet</span> </div>
     <div className='walletSection'>
         <div className='walletRow'>
             <div className='wallet'>
