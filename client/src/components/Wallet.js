@@ -10,6 +10,8 @@ function Wallet() {
 
     const [defaultAccount, setDefaultAccount] = useState(null);
 
+    let connected = false;
+
     const handleMetamask = () => {
         if (window.ethereum && window.ethereum.isMetaMask) {
             console.log('MetaMask Here!');
@@ -54,14 +56,35 @@ function Wallet() {
 
     // update account, will cause component re-render
     const accountChangedHandler = (newAccount) => {
-        setDefaultAccount(newAccount);
+
+        if (newAccount.length == 0)
+        {
+            setDefaultAccount(null);
+            if (connected)
+            {
+                toast.error('Metamask wallet disconnected', {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                });
+                connected = false;
+            }
+        }
+        else 
+        {
+            setDefaultAccount(newAccount);
+            connected = true;
+        }
     }
 
     const chainChangedHandler = () => {
         // reload the page to avoid any errors with chain change mid use of application
         window.location.reload();
     }
-
 
     // listen for account changes
     window.ethereum.on('accountsChanged', accountChangedHandler);
