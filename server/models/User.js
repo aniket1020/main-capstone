@@ -40,6 +40,51 @@ let userSchema = new Schema(
               message: '{VALUE} is not a valid email!'
             }
         },
+        profileImagePath: {
+            type: String,
+            trim: true,
+            required: false,
+            default: null
+        },
+        profileBackgroundImagePath: {
+            type: String,
+            trim: true,
+            required: false,
+            default: null
+        },
+        liked: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'NFT'
+            }
+        ],
+        owned: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'NFT'
+            }
+        ],
+        created: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'NFT'
+            }
+        ],
+        // NFTs that are not minted
+        artwork: {
+            type: [{
+                path: String,
+                trim: true
+            }],
+            default: []
+        },
+        // NFTs put on sale
+        history: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'NFT'
+            }
+        ],
         website: {
             type: String,
             trim: true,
