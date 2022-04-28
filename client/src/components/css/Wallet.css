@@ -3,7 +3,6 @@
     background-color: black;
     height: 80vh;
     color: white;
-    display: flex;
     flex-direction: column;
     align-items: center;
   }
@@ -46,9 +45,14 @@
   }
 
   .wallet{
+    border: 1.5px solid black;
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column; 
+  }
+
+  .wallet:hover {
+    border: 1.5px solid rgba(255, 123, 0, 0.76);
+    cursor: pointer;
   }
 
   .walletImage {
