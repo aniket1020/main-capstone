@@ -1,4 +1,4 @@
-.Header {
+.Wallet__Header {
     display: flex;
     background-color: black;
     height: 80vh;
@@ -8,24 +8,24 @@
     align-items: center;
   }
   
-  .Header__row1 {
+  .Wallet__Header__row1 {
     color: #f18a24;
     font-size: small;
     margin-top: 50px;
   }
   
-  .Header__row2 {
+  .Wallet__Header__row2 {
     font-size: 22px;
     font-weight: 600;
   }
   
-  .Header__row3 {
+  .Wallet__Header__row3 {
     font-size: 11px;
     padding-top: 20px;
     margin-bottom: 50px;
   }
   
-  .Header__row3 > span {
+  .Wallet__Header__row3 > span {
     color: rgb(226, 115, 24);
   }
 
