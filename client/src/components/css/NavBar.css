@@ -12,6 +12,11 @@
     margin-left: 25px;
 }
 
+#logo:hover
+{
+    cursor: pointer;
+}
+
 .navbar-links {
     display: flex;
     width: 50%;

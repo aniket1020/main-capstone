@@ -3,13 +3,17 @@ import './css/NavBar.css'
 import Logo from './images/logo.png'
 
 import { slide as Menu } from 'react-burger-menu'
+import { useNavigate, useLocation } from "react-router-dom";
 
 function NavBar()
 {
     const [walletAddress, setAddress] = useState(null);
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
     return  <div className="navbar">
-                <img id='logo' src={Logo} alt="Logo"/>
+                <img id='logo' src={Logo} onClick={() => location.pathname === '/' ? {} : navigate('/')} alt="Logo"/>
                 
                 <div className="navbar-links">
                     <div className='nv-link'><a href='#'>Marketplace</a></div>
@@ -17,7 +21,7 @@ function NavBar()
                     <div className='nv-link'><a href='#'>Create</a></div>
                     <div className='nv-link'><a href='#'>Feed</a></div>
 
-                    <div className="connect-wallet btn-custom">
+                    <div className="connect-wallet btn-custom" onClick={() => location.pathname === '/wallet' ? {} : navigate('/wallet')}>
                         <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
                     </div>
                 </div>
@@ -29,7 +33,7 @@ function NavBar()
                         <div className='nv-link'><a href='#'>Create</a></div>
                         <div className='nv-link'><a href='#'>Feed</a></div>
 
-                        <div className="connect-wallet btn-custom">
+                        <div className="connect-wallet btn-custom" onClick={() => location.pathname === '/wallet' ? {} : navigate('/wallet')}>
                             <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
                         </div>
                     </Menu>
