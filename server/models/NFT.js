@@ -8,6 +8,10 @@ let nftSchema = new Schema(
            required: [true, "Address not found"],
            trim: true,
        },
+       onSale: {
+            type: Boolean,
+            default: false
+       },
        title: {
             type: String,
             trim: true,
