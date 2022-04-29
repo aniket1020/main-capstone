@@ -23,6 +23,7 @@ let userSchema = new Schema(
         },
         userName: {
             type: String,
+            unique: [true, "username already exists"],
             required: false,
             default: null,
             trim: true,
