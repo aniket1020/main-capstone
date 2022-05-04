@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import { ToastContainer, toast } from 'react-toastify'
 
@@ -28,6 +29,15 @@ function Wallet() {
                         draggable: false,
                         progress: undefined,
                     });
+                    // POST Backend
+                    axios.post('http://127.0.0.1:5000/connectWallet',{
+                        walletId: result[0]
+                        })
+                    .then(res => 
+                        {
+                            console.log(res);
+                        })
+                    .catch(err => console.log(err));
                 })
                 .catch(error => {
                     toast.error('Error connecting to wallet', {

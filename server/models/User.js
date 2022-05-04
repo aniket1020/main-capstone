@@ -75,7 +75,7 @@ let userSchema = new Schema(
         artwork: {
             type: [{
                 path: String,
-                trim: true
+                // trim: true
             }],
             default: []
         },
