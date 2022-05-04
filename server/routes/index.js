@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var connectWallet = require('../controllers/auth.controller');
+var controller = require('../controllers/auth.controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 
 /* Connect Wallet */
-router.post("/connectWallet", connectWallet.connectWallet, function(req, res, next) {
+router.post("/connectWallet", controller.connectWallet, function(req, res, next) {
   res.json({'response':'hello'});
   console.log("Registered user successfully");
 });
