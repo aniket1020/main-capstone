@@ -20,6 +20,7 @@ exports.connectWallet = (req, res) => {
             });
             user.save((err, user) => {
                 if (err) {
+                    console.log(err);
                     res.status(500)
                         .send({
                             message: err
@@ -38,16 +39,7 @@ exports.connectWallet = (req, res) => {
 
         res.status(200)
             .send({
-                user: 
-                {
-                    _id: user._id
-                    ,walletId: user.walletId
-                    ,firstName: user.firstName
-                    ,lastName: user.lastName
-                    ,userName: user.userName
-                    ,profileImagePath: user.profileImagePath
-                    ,profileBackgroundImagePath: user.profileBackgroundImagePath
-                },
+                user: user,
                 message: "Login successful",
                 accessToken: token
             });

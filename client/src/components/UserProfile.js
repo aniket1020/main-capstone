@@ -62,7 +62,7 @@ function UserProfile()
             {/* Only the profile background */}
             <div className='profileBackground'>
                 <img className='profileBackgroundImage' 
-                    src={ user.profileBackgroundImage ? user.profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
+                    src={ user ? user.profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
                     alt='no image'/>
             </div>
             {/* Profile user settings */}
@@ -73,21 +73,21 @@ function UserProfile()
                         roundedCircle
                         height={160}
                         width={160}
-                        src={user.profileImage ? user.profileImage : require('./images/profileDefault.png')}
+                        src={user ? user.profileImage : require('./images/profileDefault.png')}
                         alt='no image'
                     />
                     <div className='profileName'>
                         <strong>
-                            {user.firstName ? user.firstName + " " + user.lastName : <i>No Name Set</i>}
+                            {user ? user.firstName + " " + user.lastName : <i>No Name Set</i>}
                         </strong>
                     </div>
                     <div className='profileUserName'>
-                            {user.userName ? "@"+user.userName : <i>No Username Set</i>}
+                            {user ? "@"+user.userName : <i>No Username Set</i>}
                     </div>
                 </div>
                 <div className='profileUserSettings'>
                     <div className='walletAddress'>
-                        {user.walletId ? user.walletId : <i>No wallet address</i>}
+                        {user ? user.walletId : <i>No wallet address</i>}
                     </div>
                     <div className='id-copy'>
                         <CopyOutlined onClick={() => {

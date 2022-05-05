@@ -23,14 +23,20 @@ let userSchema = new Schema(
         },
         userName: {
             type: String,
-            unique: [true, "username already exists"],
+            index: {
+                unique: true,
+                partialFilterExpression: { userName: { $type: 'string' } },
+            },
             required: false,
             default: null,
             trim: true,
         },
         email: {
             type: String,
-            unique: [true, "email already exists in database!"],
+            index: {
+                unique: true,
+                partialFilterExpression: { email: { $type: 'string' } },
+            },
             lowercase: true,
             trim: true,
             required: false,

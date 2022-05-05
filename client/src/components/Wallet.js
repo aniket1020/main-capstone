@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify';
 
 import './css/Wallet.css';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
-import { useDispatch } from 'react-redux';
-import { setUser } from '../features/userSlice';
-import { setAccessToken } from '../features/accessTokenSlice';
-
 function Wallet() {
-
-    const dispatch = useDispatch()
-
-    let connected = false;
 
     const handleMetamask = () => {
         if (window.ethereum && window.ethereum.isMetaMask) {
@@ -23,7 +14,7 @@ function Wallet() {
 
             window.ethereum.request({ method: 'eth_requestAccounts' })
                 .then(result => {
-                    accountChangedHandler(result[0]);
+                    // accountChangedHandler(result[0]);
                     toast.success('Metamask wallet connected successfully', {
                         position: "bottom-center",
                         autoClose: 2000,
@@ -33,17 +24,6 @@ function Wallet() {
                         draggable: false,
                         progress: undefined,
                     });
-                    // POST Backend
-                    axios.post('http://127.0.0.1:5000/connectWallet',{
-                        walletId: result[0]
-                        })
-                    .then(res => 
-                        {
-                            console.log(res);
-                            dispatch(setAccessToken(res.data.accessToken));
-                            dispatch(setUser(res.data.user));
-                        })
-                    .catch(err => console.log(err));
                 })
                 .catch(error => {
                     console.log(error);
@@ -70,41 +50,6 @@ function Wallet() {
             });
         }
     }
-
-    // update account, will cause component re-render
-    const accountChangedHandler = (newAccount) => {
-
-        if (newAccount.length == 0)
-        {
-            dispatch(setUser(null));
-            if (connected)
-            {
-                toast.error('Metamask wallet disconnected', {
-                    position: "bottom-center",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                });
-                connected = false;
-            }
-        }
-        else 
-        {
-            connected = true;
-        }
-    }
-
-    const chainChangedHandler = () => {
-        // reload the page to avoid any errors with chain change mid use of application
-        window.location.reload();
-    }
-
-    // listen for account changes
-    window.ethereum.on('accountsChanged', accountChangedHandler);
-    window.ethereum.on('chainChanged', chainChangedHandler);
 
     return (
         <>
