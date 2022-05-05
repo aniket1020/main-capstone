@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import './css/NavBar.css';
 import Logo from './images/logo.png';
 
@@ -24,11 +24,19 @@ function NavBar()
 
     let connected = false;
 
+    useEffect(() => {
+        // listen for account changes
+        window.ethereum.on('accountsChanged', accountChangedHandler);
+        window.ethereum.on('chainChanged', chainChangedHandler);
+    })
+
     // update account, will cause component re-render
     const accountChangedHandler = (newAccount) => {
+        console.log("Event fired", newAccount);
         if (newAccount.length == 0)
         {
             dispatch(setUser(null));
+            dispatch(setAccessToken(null));
             if (connected)
             {
                 toast.error('Metamask wallet disconnected', {
@@ -46,21 +54,6 @@ function NavBar()
         else 
         {
             connected = true;
-            // POST Backend
-            console.log("**",newAccount, walletAddress);
-            if (!(walletAddress in newAccount))
-            {
-                axios.post('http://127.0.0.1:5000/connectWallet',{
-                walletId: newAccount[0]
-                })
-                .then(res => 
-                {
-                    console.log("-->",res);
-                    dispatch(setAccessToken(res.data.accessToken));
-                    dispatch(setUser(res.data.user));
-                })
-                .catch(err => console.log(err));
-            }
         }
     }
 
@@ -68,10 +61,6 @@ function NavBar()
         // reload the page to avoid any errors with chain change mid use of application
         window.location.reload();
     }
-
-    // listen for account changes
-    window.ethereum.on('accountsChanged', accountChangedHandler);
-    window.ethereum.on('chainChanged', chainChangedHandler);
 
     return <>
             <ToastContainer 

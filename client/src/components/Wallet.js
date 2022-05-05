@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -6,7 +6,16 @@ import './css/Wallet.css';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { setUser } from '../features/userSlice';
+import { setAccessToken } from '../features/accessTokenSlice';
+
 function Wallet() {
+
+    const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null)
+    const dispatch = useDispatch();
 
     const handleMetamask = () => {
         if (window.ethereum && window.ethereum.isMetaMask) {
@@ -14,7 +23,17 @@ function Wallet() {
 
             window.ethereum.request({ method: 'eth_requestAccounts' })
                 .then(result => {
-                    // accountChangedHandler(result[0]);
+                    if (!walletAddress)
+                    axios.post('http://127.0.0.1:5000/connectWallet',{
+                        walletId: result[0]
+                    })
+                    .then(res => 
+                    {
+                        dispatch(setAccessToken(res.data.accessToken));
+                        dispatch(setUser(res.data.user));
+                    })
+                    .catch(err => console.log(err));
+
                     toast.success('Metamask wallet connected successfully', {
                         position: "bottom-center",
                         autoClose: 2000,
