@@ -62,8 +62,13 @@ function UserProfile()
             {/* Only the profile background */}
             <div className='profileBackground'>
                 <img className='profileBackgroundImage' 
-                    src={ user ? user.profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
-                    alt='no image'/>
+                    src=
+                    { 
+                        user ? 
+                        user.profileBackgroundImage ? user.profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') 
+                        : require('./images/backgroundUserProfileImage.jpeg')
+                    }
+                        alt='no image'/>
             </div>
             {/* Profile user settings */}
             <div className='profileId'>
@@ -73,16 +78,29 @@ function UserProfile()
                         roundedCircle
                         height={160}
                         width={160}
-                        src={user ? user.profileImage : require('./images/profileDefault.png')}
+                        src=
+                        {
+                            user ? 
+                            user.profileImage ? user.profileImage : require('./images/profileDefault.png')
+                            : require('./images/profileDefault.png')
+                        }
                         alt='no image'
                     />
                     <div className='profileName'>
                         <strong>
-                            {user ? user.firstName + " " + user.lastName : <i>No Name Set</i>}
+                            {
+                                user ? 
+                                user.firstName ? user.firstName + " " + user.lastName : <i>No Name Set</i>
+                                : <i>No Name Set</i>
+                            }
                         </strong>
                     </div>
                     <div className='profileUserName'>
-                            {user ? "@"+user.userName : <i>No Username Set</i>}
+                            {
+                                user ? 
+                                user.userName ? "@"+user.userName : <i>No Username Set</i>
+                                : <i>No Username Set</i>
+                            }
                     </div>
                 </div>
                 <div className='profileUserSettings'>
