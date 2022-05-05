@@ -26,24 +26,21 @@ const cards = {
 
 function UserProfile()
 {
-    const user = useSelector((state) => state.user.value);
+    const user = useSelector((state) => state.user.value)
     console.log(user);
-
-    // const [visibleCards, setVisibleCards] = useState(4);
-    const visibleCards = 4
+    const [visibleCards, setVisibleCards] = useState(4);
 
     const totalCardsSize = Object.keys(cards).length;
     const isCardsListEmpty = totalCardsSize === 0 ? true : false;
-    // const [loadMoreVisible, setLoadMoreVisible] = useState(totalCardsSize <= 4 ? false : true);
-    const loadMoreVisible = false;
+    const [loadMoreVisible, setLoadMoreVisible] = useState(totalCardsSize <= 4 ? false : true);
 
     const addUserCards = () =>
     {
-        // setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
+        setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
 
         if(visibleCards >= totalCardsSize)
         {
-            // setLoadMoreVisible(false);
+            setLoadMoreVisible(false);
         }
     }
 
@@ -65,7 +62,7 @@ function UserProfile()
             {/* Only the profile background */}
             <div className='profileBackground'>
                 <img className='profileBackgroundImage' 
-                    src={ user !== null ? user.profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
+                    src={ user.profileBackgroundImage ? user.profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
                     alt='no image'/>
             </div>
             {/* Profile user settings */}
@@ -76,27 +73,27 @@ function UserProfile()
                         roundedCircle
                         height={160}
                         width={160}
-                        src={user !== null ? user.profileImage : require('./images/profileDefault.png')}
+                        src={user.profileImage ? user.profileImage : require('./images/profileDefault.png')}
                         alt='no image'
                     />
                     <div className='profileName'>
                         <strong>
-                            {user !== null ? user.firstName + user.lastName : <i>No Name Set</i>}
+                            {user.firstName !== null ? user.firstName + " " + user.lastName : <i>No Name Set</i>}
                         </strong>
                     </div>
                     <div className='profileUserName'>
-                            {user !== null ? "@"+user.userName : <i>No Username Set</i>}
+                            {user.userName !== null ? "@"+user.userName : <i>No Username Set</i>}
                     </div>
                 </div>
                 <div className='profileUserSettings'>
                     <div className='walletAddress'>
-                        {user !== null ? user.walletAddress : <i>No wallet address</i>}
+                        {user.walletId !== null ? user.walletId : <i>No wallet address</i>}
                     </div>
                     <div className='id-copy'>
                         <CopyOutlined onClick={() => {
-                            if(user.walletAddress)
+                            if(user.walletId)
                             {    
-                                navigator.clipboard.writeText(String(user.walletAddress));
+                                navigator.clipboard.writeText(String(user.walletId));
                                 toast.success('Copied to clipboard successfully', {
                                     position: "bottom-center",
                                     autoClose: 2000,
