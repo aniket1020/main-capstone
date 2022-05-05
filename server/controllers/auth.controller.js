@@ -45,6 +45,8 @@ exports.connectWallet = (req, res) => {
                     ,firstName: user.firstName
                     ,lastName: user.lastName
                     ,userName: user.userName
+                    ,profileImagePath: user.profileImagePath
+                    ,profileBackgroundImagePath: user.profileBackgroundImagePath
                 },
                 message: "Login successful",
                 accessToken: token

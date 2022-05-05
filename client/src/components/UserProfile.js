@@ -10,57 +10,11 @@ import Icon,{CopyOutlined, EditOutlined, SettingOutlined} from '@ant-design/icon
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+import { useSelector } from 'react-redux';
+
 // Temp JSON object for NFT cards
 const cards = {
     0:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    1:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    2:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    3:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    4:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    5:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    6:{
         'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
           , title:'NFT Monkeys'
           , tags:{0:'3D',1:'ART',2:'AUDIO'}
@@ -72,25 +26,24 @@ const cards = {
 
 function UserProfile()
 {
-    const [profileBackgroundImage, setBackgroundImage]  = useState(null);
-    const [profileImage, setProfileImage]               = useState(null);
-    const [profileName, setProfileName]                 = useState(null);
-    const [userName, setUserName]                       = useState(null);
-    const [walletAddress, setWalletAddress]             = useState(null);
+    const user = useSelector((state) => state.user.value);
+    console.log(user);
 
-    const [visibleCards, setVisibleCards] = useState(4);
+    // const [visibleCards, setVisibleCards] = useState(4);
+    const visibleCards = 4
 
     const totalCardsSize = Object.keys(cards).length;
     const isCardsListEmpty = totalCardsSize === 0 ? true : false;
-    const [loadMoreVisible, setLoadMoreVisible] = useState(totalCardsSize <= 4 ? false : true);
+    // const [loadMoreVisible, setLoadMoreVisible] = useState(totalCardsSize <= 4 ? false : true);
+    const loadMoreVisible = false;
 
     const addUserCards = () =>
     {
-        setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
+        // setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
 
         if(visibleCards >= totalCardsSize)
         {
-            setLoadMoreVisible(false);
+            // setLoadMoreVisible(false);
         }
     }
 
@@ -112,7 +65,7 @@ function UserProfile()
             {/* Only the profile background */}
             <div className='profileBackground'>
                 <img className='profileBackgroundImage' 
-                    src={ profileBackgroundImage !== null ? profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
+                    src={ user !== null ? user.profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
                     alt='no image'/>
             </div>
             {/* Profile user settings */}
@@ -123,27 +76,27 @@ function UserProfile()
                         roundedCircle
                         height={160}
                         width={160}
-                        src={profileImage !== null ? profileImage : require('./images/profileDefault.png')}
+                        src={user !== null ? user.profileImage : require('./images/profileDefault.png')}
                         alt='no image'
                     />
                     <div className='profileName'>
                         <strong>
-                            {profileName !== null ? profileName : <i>No Name Set</i>}
+                            {user !== null ? user.firstName + user.lastName : <i>No Name Set</i>}
                         </strong>
                     </div>
                     <div className='profileUserName'>
-                            {userName !== null ? "@"+userName : <i>No Username Set</i>}
+                            {user !== null ? "@"+user.userName : <i>No Username Set</i>}
                     </div>
                 </div>
                 <div className='profileUserSettings'>
                     <div className='walletAddress'>
-                        {walletAddress !== null ? walletAddress : <i>No wallet address</i>}
+                        {user !== null ? user.walletAddress : <i>No wallet address</i>}
                     </div>
                     <div className='id-copy'>
                         <CopyOutlined onClick={() => {
-                            if(walletAddress)
+                            if(user.walletAddress)
                             {    
-                                navigator.clipboard.writeText(String(walletAddress));
+                                navigator.clipboard.writeText(String(user.walletAddress));
                                 toast.success('Copied to clipboard successfully', {
                                     position: "bottom-center",
                                     autoClose: 2000,
