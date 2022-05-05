@@ -7,9 +7,13 @@ import './css/Wallet.css';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
+import { useDispatch } from 'react-redux';
+import { setWalletAddress } from '../features/walletAddressSlice';
+import { setAccessToken } from '../features/accessTokenSlice';
+
 function Wallet() {
 
-    const [defaultAccount, setDefaultAccount] = useState(null);
+    const dispatch = useDispatch()
 
     let connected = false;
 
@@ -35,11 +39,13 @@ function Wallet() {
                         })
                     .then(res => 
                         {
-                            console.log(res);
+                            dispatch(setAccessToken(res.data.accessToken));
+                            dispatch(setWalletAddress(result[0]));
                         })
                     .catch(err => console.log(err));
                 })
                 .catch(error => {
+                    console.log(error);
                     toast.error('Error connecting to wallet', {
                         position: "bottom-center",
                         autoClose: 2000,
@@ -69,7 +75,7 @@ function Wallet() {
 
         if (newAccount.length == 0)
         {
-            setDefaultAccount(null);
+            dispatch(setWalletAddress(null));
             if (connected)
             {
                 toast.error('Metamask wallet disconnected', {
@@ -86,7 +92,6 @@ function Wallet() {
         }
         else 
         {
-            setDefaultAccount(newAccount);
             connected = true;
         }
     }

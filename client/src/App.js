@@ -7,8 +7,12 @@ import EditProfile from './components/EditProfile'
 import Explore from './components/Explore';
 import LandingPage from "./components/LandingPage";
 
+import store from './store'
+import { Provider } from 'react-redux'
+
 function App() {
   return (
+    <Provider store={store}>
     <div className="App">
       <Routes>
         <Route exact path='/userProfile' element={<UserProfile />} />
@@ -18,6 +22,7 @@ function App() {
         <Route exact path="/" element={<LandingPage />} />
       </Routes>
     </div>
+    </Provider>
   );
 }
 

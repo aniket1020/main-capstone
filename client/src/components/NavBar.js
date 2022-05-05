@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import './css/NavBar.css'
-import Logo from './images/logo.png'
+import './css/NavBar.css';
+import Logo from './images/logo.png';
 
-import { slide as Menu } from 'react-burger-menu'
+import { slide as Menu } from 'react-burger-menu';
 import { useNavigate, useLocation } from "react-router-dom";
+
+import { useSelector } from 'react-redux';
 
 function NavBar()
 {
-    const [walletAddress, setAddress] = useState(null);
+    const walletAddress = useSelector((state) => state.walletAddress.value)
 
     const navigate = useNavigate();
     const location = useLocation();
