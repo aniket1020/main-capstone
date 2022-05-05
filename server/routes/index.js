@@ -10,10 +10,7 @@ router.get('/', function(req, res, next) {
 
 
 /* Connect Wallet */
-router.post("/connectWallet", controller.connectWallet, function(req, res, next) {
-  res.json({'response':'hello'});
-  console.log("Registered user successfully");
-});
+router.post("/connectWallet", controller.connectWallet);
 
 /* Some sample upload demo */
 /* 
