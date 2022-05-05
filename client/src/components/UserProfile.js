@@ -78,16 +78,16 @@ function UserProfile()
                     />
                     <div className='profileName'>
                         <strong>
-                            {user.firstName !== null ? user.firstName + " " + user.lastName : <i>No Name Set</i>}
+                            {user.firstName ? user.firstName + " " + user.lastName : <i>No Name Set</i>}
                         </strong>
                     </div>
                     <div className='profileUserName'>
-                            {user.userName !== null ? "@"+user.userName : <i>No Username Set</i>}
+                            {user.userName ? "@"+user.userName : <i>No Username Set</i>}
                     </div>
                 </div>
                 <div className='profileUserSettings'>
                     <div className='walletAddress'>
-                        {user.walletId !== null ? user.walletId : <i>No wallet address</i>}
+                        {user.walletId ? user.walletId : <i>No wallet address</i>}
                     </div>
                     <div className='id-copy'>
                         <CopyOutlined onClick={() => {
