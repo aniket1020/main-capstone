@@ -8,7 +8,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 
 import { useDispatch } from 'react-redux';
-import { setWalletAddress } from '../features/walletAddressSlice';
+import { setUser } from '../features/userSlice';
 import { setAccessToken } from '../features/accessTokenSlice';
 
 function Wallet() {
@@ -39,8 +39,9 @@ function Wallet() {
                         })
                     .then(res => 
                         {
+                            console.log(res);
                             dispatch(setAccessToken(res.data.accessToken));
-                            dispatch(setWalletAddress(result[0]));
+                            dispatch(setUser(res.data.user));
                         })
                     .catch(err => console.log(err));
                 })
@@ -75,7 +76,7 @@ function Wallet() {
 
         if (newAccount.length == 0)
         {
-            dispatch(setWalletAddress(null));
+            dispatch(setUser(null));
             if (connected)
             {
                 toast.error('Metamask wallet disconnected', {

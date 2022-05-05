@@ -38,9 +38,13 @@ exports.connectWallet = (req, res) => {
 
         res.status(200)
             .send({
-                user: {
-                    id: user._id,
-                    walletId: user.walletId,
+                user: 
+                {
+                    _id: user._id
+                    ,walletId: user.walletId
+                    ,firstName: user.firstName
+                    ,lastName: user.lastName
+                    ,userName: user.userName
                 },
                 message: "Login successful",
                 accessToken: token

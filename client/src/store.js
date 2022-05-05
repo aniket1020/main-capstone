@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import accessTokenSlice from './features/accessTokenSlice';
-import walletAddressSlice from './features/walletAddressSlice';
+import userSlice from './features/userSlice';
 
 export default configureStore({
   reducer: 
   {
       accessToken: accessTokenSlice
-      ,walletAddress: walletAddressSlice
+      ,user: userSlice
   }
 });

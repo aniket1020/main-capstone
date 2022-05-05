@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 function NavBar()
 {
-    const walletAddress = useSelector((state) => state.walletAddress.value)
+    const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null)
 
     const navigate = useNavigate();
     const location = useLocation();
