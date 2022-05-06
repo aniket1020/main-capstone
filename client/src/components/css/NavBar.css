@@ -43,13 +43,14 @@
     padding: 8px;
     align-items: center;
     border-radius: 5px;
-    max-width: 135px;
+    max-width: 150px;
 }
 
 .connect-wallet-content {
     overflow-x: hidden;
     padding: 0px 3px 0px 3px;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .btn-custom {

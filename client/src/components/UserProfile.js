@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import './css/UserProfile.css'
-import NavBar from './NavBar'
-import Footer from './Footer'
-import Card from './Card'
+import { useEffect, useState } from 'react';
+import './css/UserProfile.css';
+import NavBar from './NavBar';
+import Footer from './Footer';
+import Card from './Card';
 
-import Image from 'react-bootstrap/Image'
-import Icon,{CopyOutlined, EditOutlined, SettingOutlined} from '@ant-design/icons'
+import Image from 'react-bootstrap/Image';
+import {CopyOutlined, EditOutlined, SettingOutlined} from '@ant-design/icons';
 
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
 // Temp JSON object for NFT cards
 const cards = {
@@ -26,13 +28,37 @@ const cards = {
 
 function UserProfile()
 {
-    const user = useSelector((state) => state.user.value)
-    console.log(user);
-    const [visibleCards, setVisibleCards] = useState(4);
+    const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null)
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [visibleCards, setVisibleCards] = useState(4);
     const totalCardsSize = Object.keys(cards).length;
     const isCardsListEmpty = totalCardsSize === 0 ? true : false;
     const [loadMoreVisible, setLoadMoreVisible] = useState(totalCardsSize <= 4 ? false : true);
+    
+    const [isLoading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+
+    useEffect(async () => {
+        await axios.get('http://127.0.0.1:5000/getUser', 
+        {
+            params: 
+            {
+                walletId: searchParams.get('walletId')
+            }
+        }).then(res => {
+            setUser(res.data.user);
+            setLoading(false);
+        });
+    }, []);
+
+    if (isLoading) 
+    {
+        return <div className="App">Loading...</div>;
+    }
+
+    
 
     const addUserCards = () =>
     {
@@ -139,8 +165,13 @@ function UserProfile()
                             toastStyle={{ backgroundColor: "black", color: "white" }}
                         />
                     </div>
-                    <div className='id-btn editProfileBtn'><EditOutlined style={{fontSize:"16.5px"}}/>&nbsp; Edit Profile</div>
-                    <div className='id-btn settingsBtn'><SettingOutlined style={{fontSize:"16.5px"}}/>&nbsp; Settings</div>
+                    { walletAddress === user.walletId ? 
+                    <>
+                        <div className='id-btn editProfileBtn'><EditOutlined style={{fontSize:"16.5px"}}/>&nbsp; Edit Profile</div>
+                        <div className='id-btn settingsBtn'><SettingOutlined style={{fontSize:"16.5px"}}/>&nbsp; Settings</div>
+                    </> : 
+                    <></>
+                    }
                 </div>
             </div>
             <div className='userCollectionFilter'>

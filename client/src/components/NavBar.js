@@ -11,8 +11,6 @@ import { useSelector } from 'react-redux';
 import { setUser } from '../features/userSlice';
 import { setAccessToken } from '../features/accessTokenSlice';
 
-import axios from 'axios';
-
 function NavBar()
 {    
     const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null)
@@ -28,11 +26,10 @@ function NavBar()
         // listen for account changes
         window.ethereum.on('accountsChanged', accountChangedHandler);
         window.ethereum.on('chainChanged', chainChangedHandler);
-    })
+    }, [])
 
     // update account, will cause component re-render
     const accountChangedHandler = (newAccount) => {
-        console.log("Event fired", newAccount);
         if (newAccount.length == 0)
         {
             dispatch(setUser(null));
