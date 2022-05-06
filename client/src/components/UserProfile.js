@@ -41,7 +41,7 @@ function UserProfile()
     const [user, setUser] = useState(null);
 
     useEffect(async () => {
-        await axios.get('http://127.0.0.1:5000/getUser', 
+        await axios.get('http://127.0.0.1:5000/userProfile/getUser', 
         {
             params: 
             {
