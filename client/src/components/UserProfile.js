@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import './css/UserProfile.css';
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -11,7 +12,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 // Temp JSON object for NFT cards
@@ -30,8 +30,6 @@ function UserProfile()
 {
     const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null)
 
-    const [searchParams, setSearchParams] = useSearchParams();
-
     const [visibleCards, setVisibleCards] = useState(4);
     const totalCardsSize = Object.keys(cards).length;
     const isCardsListEmpty = totalCardsSize === 0 ? true : false;
@@ -40,12 +38,14 @@ function UserProfile()
     const [isLoading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
+    const navigate = useNavigate();
+
     useEffect(async () => {
         await axios.get('http://127.0.0.1:5000/userProfile/getUser', 
         {
             params: 
             {
-                walletId: searchParams.get('walletId')
+                walletId: walletAddress
             }
         }).then(res => {
             setUser(res.data.user);
@@ -167,8 +167,10 @@ function UserProfile()
                     </div>
                     { walletAddress === user.walletId ? 
                     <>
-                        <div className='id-btn editProfileBtn'><EditOutlined style={{fontSize:"16.5px"}}/>&nbsp; Edit Profile</div>
-                        <div className='id-btn settingsBtn'><SettingOutlined style={{fontSize:"16.5px"}}/>&nbsp; Settings</div>
+                        <div className='id-btn editProfileBtn' onClick={() => navigate('/userProfile/edit')}>
+                            <EditOutlined style={{fontSize:"16.5px"}}/>&nbsp; Edit Profile</div>
+                        <div className='id-btn settingsBtn' onClick={() => navigate('/userProfile/edit')}>
+                            <SettingOutlined style={{fontSize:"16.5px"}}/>&nbsp; Settings</div>
                     </> : 
                     <></>
                     }

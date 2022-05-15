@@ -40,12 +40,12 @@ let userSchema = new Schema(
             lowercase: true,
             trim: true,
             required: false,
-            validate: {
-              validator: function (v) {
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-              },
-              message: '{VALUE} is not a valid email!'
-            }
+            // validate: {
+            //   validator: function (v) {
+            //     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+            //   },
+            //   message: '{VALUE} is not a valid email!'
+            // }
         },
         profileImagePath: {
             type: String,

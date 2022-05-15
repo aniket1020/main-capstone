@@ -28,13 +28,9 @@
     color: rgb(115, 115, 115);
 }
 
-.nv-link>a {
-    text-decoration: none;
-    color: rgb(115, 115, 115);
-}
-
-.nv-link>a:hover {
+.nv-link:hover {
     color: rgb(200, 200, 200);
+    cursor: pointer;
 }
 
 .connect-wallet {

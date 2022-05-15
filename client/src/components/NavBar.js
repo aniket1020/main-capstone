@@ -67,10 +67,10 @@ function NavBar()
                 <img id='logo' src={Logo} onClick={() => location.pathname === '/' ? {} : navigate('/')} alt="Logo"/>
                 
                 <div className="navbar-links">
-                    <div className='nv-link'><a href='#'>Marketplace</a></div>
-                    <div className='nv-link'><a href='#'>Artwork</a></div>
-                    <div className='nv-link'><a href='#'>Create</a></div>
-                    <div className='nv-link'><a href='#'>Feed</a></div>
+                    <div className='nv-link'>Marketplace</div>
+                    <div className='nv-link' onClick={() => location.pathname === '/userProfile' ? {} : navigate('/userProfile')}>Artwork</div>
+                    <div className='nv-link'>Create</div>
+                    <div className='nv-link'>Feed</div>
 
                     <div className="connect-wallet btn-custom" onClick={() => location.pathname === '/wallet' ? {} : navigate('/wallet')}>
                         <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
@@ -79,10 +79,10 @@ function NavBar()
 
                 <div id='HamMenu'>
                     <Menu width={ '280px' } right >
-                        <div className='nv-link'><a href='#'>Marketplace</a></div>
-                        <div className='nv-link'><a href='#'>Artwork</a></div>
-                        <div className='nv-link'><a href='#'>Create</a></div>
-                        <div className='nv-link'><a href='#'>Feed</a></div>
+                        <div className='nv-link'>Marketplace</div>
+                        <div className='nv-link' onClick={() => location.pathname === '/userProfile' ? {} : navigate('/userProfile')}>Artwork</div>
+                        <div className='nv-link'>Create</div>
+                        <div className='nv-link'>Feed</div>
 
                         <div className="connect-wallet btn-custom" onClick={() => location.pathname === '/wallet' ? {} : navigate('/wallet')}>
                             <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
