@@ -89,9 +89,9 @@ function UserProfile()
             <div className='profileBackground'>
                 <img className='profileBackgroundImage' 
                     src=
-                    { 
+                    {
                         user ? 
-                        user.profileBackgroundImage ? user.profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') 
+                        user.profileBackgroundImagePath ? 'http://127.0.0.1:5000/'+user.profileBackgroundImagePath : require('./images/backgroundUserProfileImage.jpeg') 
                         : require('./images/backgroundUserProfileImage.jpeg')
                     }
                         alt='no image'/>
@@ -107,7 +107,7 @@ function UserProfile()
                         src=
                         {
                             user ? 
-                            user.profileImage ? user.profileImage : require('./images/profileDefault.png')
+                            user.profileImagePath ? 'http://127.0.0.1:5000/'+user.profileImagePath : require('./images/profileDefault.png')
                             : require('./images/profileDefault.png')
                         }
                         alt='no image'

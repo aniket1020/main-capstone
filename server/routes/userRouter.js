@@ -72,7 +72,7 @@ router.post("/userProfile/edit", verifyToken, upload.any(), (req, res) => {
         if(req.files.length == 2)
         {
           if (req.files[1]['fieldname'] == 'profileImagePath')
-          user.profileImagePath = req.files[0]['path'];
+          user.profileImagePath = req.files[1]['path'];
         }
       }
     }
@@ -105,15 +105,15 @@ router.post("/userProfile/edit", verifyToken, upload.any(), (req, res) => {
 
       user.profileBackgroundImagePath = null;
     }
-    user.firstName = req.body.firstName;
-    user.lastName = req.body.lastName;
-    user.userName = req.body.userName;
-    user.email = req.body.email;
+    user.firstName = req.body.firstName == null || req.body.firstName == "" ? req.body.firstName : null;
+    user.lastName = req.body.lastName || req.body.lastName == "" ? req.body.lastName : null;
+    user.userName = req.body.userName || req.body.userName == "" ? req.body.userName : null;
+    user.email = req.body.email || req.body.email == "" ? req.body.email : null;
 
-    user.website = req.body.website;
-    user.facebook = req.body.facebook;
-    user.twitter = req.body.twitter;
-    user.instagram = req.body.instagram;
+    user.website = req.body.website || req.body.website == "" ? req.body.website : null;
+    user.facebook = req.body.facebook || req.body.facebook == "" ? req.body.facebook : null;
+    user.twitter = req.body.twitter || req.body.twitter == "" ? req.body.twitter : null;
+    user.instagram = req.body.instagram || req.body.instagram == "" ? req.body.instagram : null;
 
     user.save((err, user) => {
       if (err) {
