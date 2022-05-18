@@ -12,6 +12,11 @@
     margin-left: 25px;
 }
 
+#logo:hover
+{
+    cursor: pointer;
+}
+
 .navbar-links {
     display: flex;
     width: 50%;
@@ -23,13 +28,9 @@
     color: rgb(115, 115, 115);
 }
 
-.nv-link>a {
-    text-decoration: none;
-    color: rgb(115, 115, 115);
-}
-
-.nv-link>a:hover {
+.nv-link:hover {
     color: rgb(200, 200, 200);
+    cursor: pointer;
 }
 
 .connect-wallet {
@@ -38,13 +39,14 @@
     padding: 8px;
     align-items: center;
     border-radius: 5px;
-    max-width: 135px;
+    max-width: 150px;
 }
 
 .connect-wallet-content {
     overflow-x: hidden;
     padding: 0px 3px 0px 3px;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .btn-custom {

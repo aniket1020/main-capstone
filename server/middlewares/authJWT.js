@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
         jwt.verify(req.headers.authorization.split(' ')[1], process.env.API_SECRET, function (err, decode) {
             if (err) req.user = undefined;
             User.findOne({
-                _id: decode.id
+                walletId: decode.walletId
             })
                 .exec((err, user) => {
                     if (err) {

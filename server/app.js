@@ -2,11 +2,13 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const logger = require('morgan');
 
 const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
+const userRouter = require('./routes/userRouter');
 
 const app = express();
 
@@ -17,11 +19,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json())
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
+});
 
 // Mongo init
 try {
-  mongoose.connect(process.env.DATABASE || "mongodb://localhost:27017/capstoneDB", 
+  mongoose.connect(process.env.DATABASE || "mongodb://0.0.0.0:27017/capstoneDB", 
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
@@ -34,10 +44,10 @@ try {
 
 // Upload storage
 app.use(express.static(__dirname + '/public'));
-app.use('/uploads', express.static('public/uploads'));
+app.use('/public/uploads', express.static('public/uploads'));
 
 // Routes
-app.use('/', indexRouter);
+app.use('/', [indexRouter, userRouter]);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

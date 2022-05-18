@@ -8,6 +8,10 @@ let nftSchema = new Schema(
            required: [true, "Address not found"],
            trim: true,
        },
+       onSale: {
+            type: Boolean,
+            default: false
+       },
        title: {
             type: String,
             trim: true,
@@ -27,7 +31,12 @@ let nftSchema = new Schema(
             type: Schema.Types.ObjectId, 
             required: [true, "Creator not found"],
             ref: 'User'
-        }
+        },
+        tags: [{
+            type: String,
+            enum: ['3D','AUDIO','ART'],
+            default: 'ART'
+        }]
     }
 );
 

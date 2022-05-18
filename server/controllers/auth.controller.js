@@ -2,6 +2,7 @@ let jwt = require('jsonwebtoken');
 let User = require('../models/User');
 
 exports.connectWallet = (req, res) => {
+    // console.log(req.body.walletId);
     User.findOne(
         {
             walletId: req.body.walletId
@@ -24,7 +25,6 @@ exports.connectWallet = (req, res) => {
                         .send({
                             message: err
                         });
-                    return;
                 }
             });
         }
@@ -39,8 +39,7 @@ exports.connectWallet = (req, res) => {
         res.status(200)
             .send({
                 user: {
-                    id: user._id,
-                    walletId: user.walletId,
+                    walletId: user.walletId
                 },
                 message: "Login successful",
                 accessToken: token

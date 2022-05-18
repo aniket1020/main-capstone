@@ -1,14 +1,18 @@
-import { useState } from 'react'
-import './css/UserProfile.css'
-import NavBar from './NavBar'
-import Footer from './Footer'
-import Card from './Card'
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import './css/UserProfile.css';
+import NavBar from './NavBar';
+import Footer from './Footer';
+import Card from './Card';
 
-import Image from 'react-bootstrap/Image'
-import Icon,{CopyOutlined, EditOutlined, SettingOutlined} from '@ant-design/icons'
+import Image from 'react-bootstrap/Image';
+import {CopyOutlined, EditOutlined, SettingOutlined} from '@ant-design/icons';
 
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 // Temp JSON object for NFT cards
 const cards = {
@@ -20,69 +24,41 @@ const cards = {
           , created:'sanya'
           , owner:'vijaypatil'
     },
-    1:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    2:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    3:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    4:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    5:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
-    6:{
-        'src':'https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif'
-          , title:'NFT Monkeys'
-          , tags:{0:'3D',1:'ART',2:'AUDIO'}
-          , price:4
-          , created:'sanya'
-          , owner:'vijaypatil'
-    },
 };
 
 function UserProfile()
 {
-    const [profileBackgroundImage, setBackgroundImage]  = useState(null);
-    const [profileImage, setProfileImage]               = useState(null);
-    const [profileName, setProfileName]                 = useState(null);
-    const [userName, setUserName]                       = useState(null);
-    const [walletAddress, setWalletAddress]             = useState(null);
+    const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null)
 
     const [visibleCards, setVisibleCards] = useState(4);
-
     const totalCardsSize = Object.keys(cards).length;
     const isCardsListEmpty = totalCardsSize === 0 ? true : false;
     const [loadMoreVisible, setLoadMoreVisible] = useState(totalCardsSize <= 4 ? false : true);
+    
+    const [isLoading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+
+    const navigate = useNavigate();
+
+    useEffect(async () => {
+        await axios.get('http://127.0.0.1:5000/userProfile/getUser', 
+        {
+            params: 
+            {
+                walletId: walletAddress
+            }
+        }).then(res => {
+            setUser(res.data.user);
+            setLoading(false);
+        });
+    }, []);
+
+    if (isLoading) 
+    {
+        return <div className="App">Loading...</div>;
+    }
+
+    
 
     const addUserCards = () =>
     {
@@ -112,8 +88,13 @@ function UserProfile()
             {/* Only the profile background */}
             <div className='profileBackground'>
                 <img className='profileBackgroundImage' 
-                    src={ profileBackgroundImage !== null ? profileBackgroundImage : require('./images/backgroundUserProfileImage.jpeg') }
-                    alt='no image'/>
+                    src=
+                    {
+                        user ? 
+                        user.profileBackgroundImagePath ? 'http://127.0.0.1:5000/'+user.profileBackgroundImagePath : require('./images/backgroundUserProfileImage.jpeg') 
+                        : require('./images/backgroundUserProfileImage.jpeg')
+                    }
+                        alt='no image'/>
             </div>
             {/* Profile user settings */}
             <div className='profileId'>
@@ -123,27 +104,40 @@ function UserProfile()
                         roundedCircle
                         height={160}
                         width={160}
-                        src={profileImage !== null ? profileImage : require('./images/profileDefault.png')}
+                        src=
+                        {
+                            user ? 
+                            user.profileImagePath ? 'http://127.0.0.1:5000/'+user.profileImagePath : require('./images/profileDefault.png')
+                            : require('./images/profileDefault.png')
+                        }
                         alt='no image'
                     />
                     <div className='profileName'>
                         <strong>
-                            {profileName !== null ? profileName : <i>No Name Set</i>}
+                            {
+                                user ? 
+                                user.firstName ? user.firstName + " " + user.lastName : <i>No Name Set</i>
+                                : <i>No Name Set</i>
+                            }
                         </strong>
                     </div>
                     <div className='profileUserName'>
-                            {userName !== null ? "@"+userName : <i>No Username Set</i>}
+                            {
+                                user ? 
+                                user.userName ? "@"+user.userName : <i>No Username Set</i>
+                                : <i>No Username Set</i>
+                            }
                     </div>
                 </div>
                 <div className='profileUserSettings'>
                     <div className='walletAddress'>
-                        {walletAddress !== null ? walletAddress : <i>No wallet address</i>}
+                        {user ? user.walletId : <i>No wallet address</i>}
                     </div>
                     <div className='id-copy'>
                         <CopyOutlined onClick={() => {
-                            if(walletAddress)
+                            if(user.walletId)
                             {    
-                                navigator.clipboard.writeText(String(walletAddress));
+                                navigator.clipboard.writeText(String(user.walletId));
                                 toast.success('Copied to clipboard successfully', {
                                     position: "bottom-center",
                                     autoClose: 2000,
@@ -171,8 +165,15 @@ function UserProfile()
                             toastStyle={{ backgroundColor: "black", color: "white" }}
                         />
                     </div>
-                    <div className='id-btn editProfileBtn'><EditOutlined style={{fontSize:"16.5px"}}/>&nbsp; Edit Profile</div>
-                    <div className='id-btn settingsBtn'><SettingOutlined style={{fontSize:"16.5px"}}/>&nbsp; Settings</div>
+                    { walletAddress === user.walletId ? 
+                    <>
+                        <div className='id-btn editProfileBtn' onClick={() => navigate('/userProfile/edit')}>
+                            <EditOutlined style={{fontSize:"16.5px"}}/>&nbsp; Edit Profile</div>
+                        <div className='id-btn settingsBtn' onClick={() => navigate('/userProfile/edit')}>
+                            <SettingOutlined style={{fontSize:"16.5px"}}/>&nbsp; Settings</div>
+                    </> : 
+                    <></>
+                    }
                 </div>
             </div>
             <div className='userCollectionFilter'>
