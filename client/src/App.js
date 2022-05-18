@@ -6,6 +6,7 @@ import Wallet from './components/Wallet';
 import EditProfile from './components/EditProfile'
 import Explore from './components/Explore';
 import LandingPage from "./components/LandingPage";
+import UploadNft from "./components/UploadNft";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Route exact path='/wallet' element={<Wallet />} />
         <Route exact path='/userProfile/edit' element={<EditProfile />} />
         <Route exact path='/explore' element={<Explore />} />
-        <Route exact path="/" element={<LandingPage />} />
+        <Route exact path='/' element={<LandingPage />} />
+        <Route exact path='/upload' element={<UploadNft />} />
       </Routes>
     </div>
   );
