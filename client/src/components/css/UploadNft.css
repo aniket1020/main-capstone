@@ -1,0 +1,112 @@
+.UploadNft__Header {
+    display: flex;
+    background-color: black;
+    height: 80vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .UploadNft__Header__row1 {
+    color: #f18a24;
+    font-size: small;
+    margin-top: 50px;
+  }
+  
+  .UploadNft__Header__row2 {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  
+  .UploadNft__Header__row3 {
+    font-size: 11px;
+    padding-top: 20px;
+    margin-bottom: 50px;
+  }
+  
+  .UploadNft__Header__row3 > span {
+    color: rgb(226, 115, 24);
+  }
+
+  .UploadNft_box {
+    height: 13vh;
+    width: 100vh;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: rgb(226, 115, 24);
+  }
+
+  .uploadNft
+{
+    background-color: black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.uploadNftCol
+{
+    padding: 30px;
+    width: 60%;
+    height: 100%;
+}
+
+.uploadNftSectionHeader
+{
+    background-color: rgba(100, 100, 100, 0.25);
+    color: white;
+    text-align: left;
+    padding: 10px;
+    padding-left: 15px;
+    font-size: medium;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.uploadNftSectionRow
+{
+    margin-bottom: 20px;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.uploadNftSectionCol
+{
+    margin: 5px;
+    width: 50%;
+}
+
+.uploadNftLabel
+{
+    margin: 5px;
+    float: left;
+    color: white;
+}
+
+.uploadNftInput
+{
+    margin: 5px;
+}
+
+.uploadNftInput > input
+{
+    float: left;
+    width: 95%;
+}
+
+.uploadNftInputField
+{
+    width: 100%;
+    border: 0;
+    padding: 10px;
+    color: rgb(255, 255, 255, 0.75);
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: rgb(37, 37, 37);
+    outline: none;
+}
+
+  
