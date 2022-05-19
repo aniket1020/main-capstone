@@ -13,7 +13,7 @@ import { PictureOutlined } from "@ant-design/icons";
 import { DollarOutlined } from "@ant-design/icons";
 import { InboxOutlined } from "@ant-design/icons";
 
-const LandingPage = () => {
+const LandingPage = ({ marketplace, nft }) => {
   return (
     <div className="landing">
       <NavBar />
