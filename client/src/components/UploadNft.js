@@ -7,6 +7,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import { Row, Form, Button } from "react-bootstrap";
 
 import { useSelector } from 'react-redux';
+
 import { useState } from "react";
 import { ethers } from "ethers";
 
@@ -65,6 +66,7 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
     // add nftInstance to marketplaceInstance
     const listingPrice = ethers.utils.parseEther(price.toString());
     await (await marketplaceInstance.makeItem(nftInstance.address, id, listingPrice)).wait();
+
   };
 
   return (
