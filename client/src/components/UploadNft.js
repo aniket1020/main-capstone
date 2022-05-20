@@ -6,6 +6,8 @@ import { InboxOutlined } from "@ant-design/icons";
 
 import { Row, Form, Button } from "react-bootstrap";
 
+import { useSelector } from 'react-redux';
+
 import { useState } from "react";
 import { ethers } from "ethers";
 
@@ -17,14 +19,17 @@ const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 const { Dragger } = Upload;
 
-function UploadNft({ marketplace, nft, account }) {
+function UploadNft({ nftInstance, marketplaceInstance }) {
+
+  const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null);
+
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  console.log("nft: ", nft);
-  console.log("marketplace: ", marketplace);
+  console.log("nftInstance: ", nftInstance);
+  console.log("marketplaceInstance: ", marketplaceInstance);
 
   const uploadToIPFS = async (event) => {
     event.preventDefault();
@@ -52,15 +57,16 @@ function UploadNft({ marketplace, nft, account }) {
   };
   const mintThenList = async (result) => {
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
-    // mint nft
-    await (await nft.mint(uri)).wait();
-    // get tokenId of new nft
-    const id = await nft.tokenCount();
-    // approve marketplace to spend nft
-    await (await nft.setApprovalForAll(marketplace.address, true)).wait();
-    // add nft to marketplace
+    // mint nftInstance
+    await (await nftInstance.mint(uri)).wait();
+    // get tokenId of new nftInstance
+    const id = await nftInstance.tokenCount();
+    // approve marketplaceInstance to spend nftInstance
+    await (await nftInstance.setApprovalForAll(marketplaceInstance.address, true)).wait();
+    // add nftInstance to marketplaceInstance
     const listingPrice = ethers.utils.parseEther(price.toString());
-    await (await marketplace.makeItem(nft.address, id, listingPrice)).wait();
+    await (await marketplaceInstance.makeItem(nftInstance.address, id, listingPrice)).wait();
+
   };
 
   return (

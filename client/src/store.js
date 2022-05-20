@@ -9,6 +9,7 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
+
 import storage from 'redux-persist/lib/storage';
 
 import accessTokenSlice from './features/accessTokenSlice';
@@ -35,6 +36,8 @@ export default configureStore({
       getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        //   ignoredActionPaths: ['payload.NFT','payload.Marketplace'],
         },
+        // serializableCheck: false,
     }),
 });

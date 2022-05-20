@@ -12,11 +12,9 @@ import { useSelector } from "react-redux";
 import { setUser } from "../features/userSlice";
 import { setAccessToken } from "../features/accessTokenSlice";
 
-function Wallet({ web3Handler }) {
-  const walletAddress = useSelector((state) =>
-    state.user.value ? state.user.value.walletId : null
-  );
-  const dispatch = useDispatch();
+import { ethers } from 'ethers';
+
+function Wallet({loadContracts}) {
 
   const handleMetamask = () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
@@ -36,39 +34,60 @@ function Wallet({ web3Handler }) {
               })
               .catch((err) => console.log(err));
 
-          toast.success("Metamask wallet connected successfully", {
-            position: "bottom-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error("Error connecting to wallet", {
-            position: "bottom-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-          });
-        });
-    } else {
-      console.log("Need to install MetaMask");
-      toast.error("Please install MetaMask browser extension to interact", {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-      });
+            window.ethereum.request({ method: 'eth_requestAccounts' })
+                .then(result => {
+                    if (!walletAddress)
+                    axios.post('http://127.0.0.1:5000/connectWallet',{
+                        walletId: result[0]
+                    })
+                    .then(res => 
+                    {
+                        dispatch(setAccessToken(res.data.accessToken));
+                        dispatch(setUser(res.data.user));
+
+                        // Initialize web3 provider and load smart contracts
+                        const provider = new ethers.providers.Web3Provider(window.ethereum);
+                        const signer = provider.getSigner();
+
+                        loadContracts(signer);
+                    })
+                    .catch(err => console.log(err));
+
+                    toast.success('Metamask wallet connected successfully', {
+                        position: "bottom-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                    toast.error('Error connecting to wallet', {
+                        position: "bottom-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                    });
+                });
+        } else {
+            console.log('Need to install MetaMask');
+            toast.error('Please install MetaMask browser extension to interact', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+            });
+        }
+
     }
   };
 
