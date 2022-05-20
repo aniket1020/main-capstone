@@ -12,7 +12,9 @@ import { useSelector } from 'react-redux';
 import { setUser } from '../features/userSlice';
 import { setAccessToken } from '../features/accessTokenSlice';
 
-function Wallet() {
+import { ethers } from 'ethers';
+
+function Wallet({loadContracts}) {
 
     const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null)
     const dispatch = useDispatch();
@@ -31,6 +33,12 @@ function Wallet() {
                     {
                         dispatch(setAccessToken(res.data.accessToken));
                         dispatch(setUser(res.data.user));
+
+                        // Initialize web3 provider and load smart contracts
+                        const provider = new ethers.providers.Web3Provider(window.ethereum);
+                        const signer = provider.getSigner();
+
+                        loadContracts(signer);
                     })
                     .catch(err => console.log(err));
 

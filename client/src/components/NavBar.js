@@ -3,7 +3,7 @@ import './css/NavBar.css';
 import Logo from './images/logo.png';
 
 import { slide as Menu } from 'react-burger-menu';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
 import { useDispatch } from 'react-redux';
@@ -17,7 +17,6 @@ function NavBar()
 
     const dispatch = useDispatch();
 
-    const navigate = useNavigate();
     const location = useLocation();
 
     let connected = false;
@@ -26,7 +25,7 @@ function NavBar()
         // listen for account changes
         window.ethereum.on('accountsChanged', accountChangedHandler);
         window.ethereum.on('chainChanged', chainChangedHandler);
-    }, [])
+    })
 
     // update account, will cause component re-render
     const accountChangedHandler = (newAccount) => {
@@ -36,6 +35,7 @@ function NavBar()
             dispatch(setAccessToken(null));
             if (connected)
             {
+                // localStorage.clear();
                 toast.error('Metamask wallet disconnected', {
                     position: "bottom-center",
                     autoClose: 2000,
@@ -64,29 +64,47 @@ function NavBar()
                 toastStyle={{ backgroundColor: "black", color: "white" }}
             />
             <div className="navbar">
-                <img id='logo' src={Logo} onClick={() => location.pathname === '/' ? {} : navigate('/')} alt="Logo"/>
+                {location.pathname === '/' ? <img id='logo' src={Logo} alt="Logo"></img> : <Link className='nv-link' to='/'><img id='logo' src={Logo} alt="Logo"></img></Link>}
                 
                 <div className="navbar-links">
                     <div className='nv-link'>Marketplace</div>
-                    <div className='nv-link' onClick={() => location.pathname === '/userProfile' ? {} : navigate('/userProfile')}>Artwork</div>
-                    <div className='nv-link'>Create</div>
+                    <div className='nv-link'>{location.pathname === '/userProfile' ? "Artwork" : <Link className='nv-link' style={{ textDecoration: 'none' }} to='/userProfile'>Artwork</Link>}</div>
+                    <div className='nv-link'>{location.pathname === '/upload' ? "Create" : <Link className='nv-link' style={{ textDecoration: 'none' }} to='/upload'>Create</Link>}</div>
                     <div className='nv-link'>Feed</div>
 
-                    <div className="connect-wallet btn-custom" onClick={() => location.pathname === '/wallet' ? {} : navigate('/wallet')}>
-                        <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
-                    </div>
+                    {
+                        location.pathname === '/wallet' ? 
+                        <div className="connect-wallet btn-custom">
+                            <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
+                        </div>
+                        :
+                        <Link to='/wallet' style={{textDecoration:'none', color:'white'}}>
+                            <div className="connect-wallet btn-custom">
+                                <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
+                            </div>
+                        </Link>
+                    }
                 </div>
 
                 <div id='HamMenu'>
                     <Menu width={ '280px' } right >
                         <div className='nv-link'>Marketplace</div>
-                        <div className='nv-link' onClick={() => location.pathname === '/userProfile' ? {} : navigate('/userProfile')}>Artwork</div>
-                        <div className='nv-link'>Create</div>
+                        <div className='nv-link'>{location.pathname === '/userProfile' ? "Artwork" : <Link className='nv-link' to='/userProfile'>Artwork</Link>}</div>
+                        <div className='nv-link'>{location.pathname === '/upload' ? "Create" : <Link className='nv-link' to='/upload'>Create</Link>}</div>
                         <div className='nv-link'>Feed</div>
 
-                        <div className="connect-wallet btn-custom" onClick={() => location.pathname === '/wallet' ? {} : navigate('/wallet')}>
-                            <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
-                        </div>
+                        {
+                            location.pathname === '/wallet' ? 
+                            <div className="connect-wallet btn-custom">
+                                <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
+                            </div>
+                            :
+                            <Link to='/wallet' style={{textDecoration:'none', color:'white'}}>
+                                <div className="connect-wallet btn-custom">
+                                    <div className='connect-wallet-content'>{walletAddress !== null ? String(walletAddress) : "Connect Wallet"}</div>
+                                </div>
+                            </Link>
+                        }
                     </Menu>
                 </div>
             </div>

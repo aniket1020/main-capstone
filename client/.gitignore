@@ -23,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 /package-lock.json
+
+src/artifacts/*
+src/cache/*
+src/contractsData/*
