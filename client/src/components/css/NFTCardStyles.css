@@ -115,3 +115,115 @@
   border: 1px solid rgb(0, 0, 0);
   cursor: pointer;
 }
+
+.modal-content-section
+{
+  display: flex;
+  flex-flow: row;
+}
+
+.modal-col
+{
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.modal-title
+{
+  color: rgba(255, 123, 0, 0.879);
+}
+
+.modal-row
+{
+  margin: 10px 0px 0px 0px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal-box
+{
+  width: 1000px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(45, 45, 45);
+  border: 2px solid rgba(45, 45, 45, 0.75);
+  border-radius: 10px;
+  outline: none;
+  box-shadow: 24;
+  padding: 15px;
+}
+
+.modal-media
+{
+  height: 400px;
+  width: 400px;
+  border-radius: 16px;
+}
+
+.modal-row-title
+{
+  color: rgba(121, 121, 121, 0.885);
+}
+
+.buy-sell
+{
+  justify-content: center;
+  flex-grow: 1;
+  align-items: flex-end;
+}
+
+.onSaleEnabled
+{
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(1, 167, 1, 0.5);
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.onSaleDisabled
+{
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(205, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.modal-address
+{
+  border: 1px dashed rgba(255, 255, 255, 0.492);
+  padding: 5px;
+  border-radius: 5px;
+  color: rgba(99, 255, 43, 0.509);
+}
+
+.modal-price
+{
+  padding: 2px 10px 2px 10px;
+  border-radius: 5px;
+  border: 1.5px dashed rgb(54, 141, 0);
+}
+
+.modal-eth-logo
+{
+  margin: 0px 0px 0px 10px;
+}
+
+#buyButton
+{
+  width: 60%;
+  background-color: green;
+}
+
+#sellButton
+{
+  width: 60%;
+  background-color: red;
+}

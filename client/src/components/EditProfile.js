@@ -31,7 +31,7 @@ function EditProfile() {
 
   useEffect(async () => {
     await axios
-      .get("http://127.0.0.1:3001/userProfile/getUser", {
+      .get("http://127.0.0.1:5000/userProfile/getUser", {
         params: {
           walletId: walletAddress,
         },

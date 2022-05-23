@@ -1,5 +1,18 @@
+import { useState } from "react";
 import './css/NFTCardStyles.css'
-import Icon, { CopyOutlined, EditOutlined, SettingOutlined } from '@ant-design/icons'
+import Icon from '@ant-design/icons'
+
+import Image from "react-bootstrap/Image";
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import { margin } from "@mui/system";
+import Button from '@mui/material/Button';
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { CopyOutlined } from "@ant-design/icons";
 
 const HeartSvg = () => (
     <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 1024 1024">
@@ -11,34 +24,153 @@ const HeartIcon = props => <Icon component={HeartSvg}
     onClick={(e) => e.target.style.color = e.target.style.color === 'gray' ? 'hotpink' : 'gray'} {...props} />;
 
 function Card(props) {
-    return <div key={props.key} className='userItem'>
-        <div className='userItemCard'>
-            <img className='cardMedia' src={props.src} />
-            <div className='cardContent'>
-                <HeartIcon className='heartIcon' />
-                <div className='cardRow'>
-                    <div className='cardTitle'>{props.title}</div>
-                    <div className='cardTags'>
-                        {Object.keys(props.tags).map(tag => <div key={tag} className='cardTag'>{props.tags[tag]}</div>)}
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    return <>
+        <Modal
+            open={open}
+            onBackdropClick={handleClose}
+        >
+            <Box className="modal-box">
+                <div className="modal-content-section">
+                    <div className="modal-col">
+                        <Image
+                            className="modal-media"
+                            src={props.src}
+                        />
+                        <HeartIcon style={{ paddingTop: "25px", fontSize: "25px" }} className='heartIcon' />
+                    </div>
+                    <div className="modal-col">
+
+                        <div className="modal-row">
+                            <div className="modal-title">
+                                <Typography fontSize={25}># {props.title}</Typography>
+                            </div>
+                            <div>
+                                {
+                                props.onSale ? 
+                                <div className="onSaleEnabled"><Typography>On Sale</Typography></div>:
+                                <div className="onSaleDisabled"><Typography>Not on Sale</Typography></div>
+                                }
+                            </div>
+                        </div>
+
+                        <div className="modal-row modal-row-title">
+                            <div><Typography>Owner</Typography></div>
+                            <div><Typography>createdBy</Typography></div>
+                        </div>
+
+                        <div className="modal-row">
+                            <div><Typography>@{props.owner}</Typography></div>
+                            <div><Typography>@{props.created}</Typography></div>
+                        </div>
+
+                        <div className="modal-row">
+                            <div className='cardTags'>
+                                {Object.keys(props.tags).map(tag => <div key={tag} className='cardTag'>{props.tags[tag]}</div>)}
+                            </div>
+                        </div>
+
+                        <div className="modal-row modal-row-title">
+                            <div><Typography>Address</Typography></div>
+                        </div>
+
+                        <div className="modal-row">
+                            <div className="modal-address"><Typography fontSize={15}>0x5FbDB2315678afecb367f032d93F642f64180aa3</Typography></div>
+                            <CopyOutlined
+                                onClick={() => {
+                                    if (true) {
+                                        navigator.clipboard.writeText("0x5FbDB2315678afecb367f032d93F642f64180aa3");
+                                        toast.success("Copied to clipboard successfully", {
+                                            position: "bottom-center",
+                                            autoClose: 2000,
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: false,
+                                            progress: undefined,
+                                        });
+                                    } else {
+                                        toast.error("Failed to copy to clipboard", {
+                                            position: "bottom-center",
+                                            autoClose: 2000,
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: false,
+                                            progress: undefined,
+                                        });
+                                    }
+                                }}
+                            />
+                        </div>
+
+                        <div className="modal-row modal-row-title">
+                            <div><Typography>Price</Typography></div>
+                        </div>
+
+                        <div className="modal-row">
+                            <div className="modal-price">
+                                <Typography fontSize={30}>{props.price}
+                                &nbsp;
+                                <Image 
+                                    className="modal-eth-logo"
+                                    height={30}
+                                    width={20} 
+                                    src={require("./images/ethereum-brands.png")}
+                                />
+                                </Typography>
+                            </div>
+                        </div>
+
+                        <div className="modal-row buy-sell">
+                            {
+                            props.walletAddress ?
+                            <Button id='buyButton' variant="contained"><Typography>Buy</Typography></Button>
+                            :<Button id='sellButton' variant="contained"><Typography>Sell</Typography></Button>
+                            }
+                        </div>
+
                     </div>
                 </div>
-                <div className='cardRow'>
-                    <div className='cardSubTitle'>Price</div>
-                </div>
-                <div className='cardRow'>
-                    <div className='cardPrice'>{props.price} ETH</div>
-                </div>
-                <div className='cardRow'>
-                    <div className='cardSubTitle'>Created by</div>
-                    <div className='cardSubTitle'>Owner</div>
-                </div>
-                <div className='cardRow'>
-                    <div className='cardText'>@{props.created}</div>
-                    <div className='cardText'>@{props.owner}</div>
+            </Box>
+        </Modal>
+
+        <div key={props.key} className='userItem' onClick={handleOpen}>
+            <div className='userItemCard'>
+                <img className='cardMedia' src={props.src} />
+                <div className='cardContent'>
+                    <HeartIcon className='heartIcon' />
+                    <div className='cardRow'>
+                        <div className='cardTitle'>{props.title}</div>
+                        <div className='cardTags'>
+                            {Object.keys(props.tags).map(tag => <div key={tag} className='cardTag'>{props.tags[tag]}</div>)}
+                        </div>
+                    </div>
+                    <div className='cardRow'>
+                        <div className='cardSubTitle'>Price</div>
+                    </div>
+                    <div className='cardRow'>
+                        <div className='cardPrice'>{props.price} ETH</div>
+                    </div>
+                    <div className='cardRow'>
+                        <div className='cardSubTitle'>Created by</div>
+                        <div className='cardSubTitle'>Owner</div>
+                    </div>
+                    <div className='cardRow'>
+                        <div className='cardText'>@{props.created}</div>
+                        <div className='cardText'>@{props.owner}</div>
+                    </div>
                 </div>
             </div>
+            <ToastContainer
+              toastStyle={{ backgroundColor: "black", color: "white" }}
+            />
         </div>
-    </div>
+    </>
 }
 
 export default Card;
