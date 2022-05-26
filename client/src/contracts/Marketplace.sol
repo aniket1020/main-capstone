@@ -82,7 +82,7 @@ contract Marketplace is ReentrancyGuard {
         feeAccount.transfer(_totalPrice - item.price);
         // update item to sold
         item.sold = true;
-        // trasnfer nft to buyer
+        // transfer nft to buyer
         item.nft.transferFrom(address(this), msg.sender, item.tokenId);
         // emit Bought event
         emit Bought(_itemId, address(item.nft), item.tokenId, item.price, item.seller, msg.sender);

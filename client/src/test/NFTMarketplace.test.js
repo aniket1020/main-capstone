@@ -116,15 +116,20 @@ describe("NFTMarketplace", function () {
       console.log("Seller Initial Balance", fromWei(sellerInitialEthBal));
       console.log("Price", price);
 
-      expect(+fromWei(feeAccountFinalEthBal)).to.equal(
-        +fee + +fromWei(feeAccountInitialEthBal)
-      );
-
-      // feeAccount should receive fee
-
       console.log("Fee Account Final Balance", fromWei(feeAccountFinalEthBal));
       console.log("Fee Initial Balance", fromWei(feeAccountInitialEthBal));
       console.log("Fee", fee);
+      console.log(
+        "Type of final",
+        ethers.utils.parseEther(fromWei(feeAccountFinalEthBal))
+      );
+      console.log("Type of initial", typeof fromWei(feeAccountInitialEthBal));
+
+      expect(+ethers.utils.parseEther(fromWei(feeAccountFinalEthBal))).to.equal(
+        +fee + +ethers.utils.parseEther(fromWei(feeAccountInitialEthBal))
+      );
+
+      // feeAccount should receive fee
 
       expect(+fromWei(feeAccountFinalEthBal)).to.equal(
         +fromWei(feeAccountInitialEthBal) + +fee
