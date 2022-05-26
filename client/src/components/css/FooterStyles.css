@@ -1,0 +1,110 @@
+/* 
+    Main :
+        Border Color : rgb(226, 115, 24)
+        Title Color : rgb(255, 255, 255, 0.75)
+*/
+
+.footerSection
+{
+    width: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.navSection
+{
+    margin: 20px 0px 20px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.navColumn
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.navHeaderTitle
+{
+    cursor: pointer;
+    margin-top: 5px;
+    color: rgb(255, 255, 255, 0.75);
+    font-size: medium;
+}
+
+.navSectionLink
+{
+    cursor: pointer;
+    margin-top: 5px;
+    font-size: small;
+    color: rgba(255, 255, 255, 0.486);
+}
+
+.navSectionLink:hover
+{
+    color: rgb(226, 115, 24);
+}
+
+.copyrightSection
+{
+    padding: 10px;
+    font-size: small;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.subscribeSection
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.subscribeInput
+{
+    width: 100%;
+    border: 0;
+    padding: 10px;
+    color: rgb(255, 255, 255, 0.75);
+    margin-top: 20px;
+    border-radius: 4px;
+    background-color: rgb(37, 37, 37);
+    outline: none;
+}
+
+.subscribeInputButton
+{
+    width: 100%;
+    background: rgb(226, 115, 24);
+    background: linear-gradient(130deg, rgb(226, 115, 24) 0%, rgb(194, 58, 13) 100%);
+    color: rgb(255, 255, 255, 0.75);
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+.subscribeInputButton:hover
+{
+    background: black;
+    color: rgb(226, 115, 24);
+    border: 2px solid rgb(226, 115, 24);
+}
+
+@media only screen and (max-width: 950px) 
+{
+    .navSection
+    {
+        align-items: center;
+        flex-direction: column;
+    }
+    .navColumn
+    {
+        align-items: center;
+    }
+}

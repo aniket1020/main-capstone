@@ -1,0 +1,135 @@
+.navbar {
+    display: flex;
+    background-color: black;
+    color: white;
+    height: 55px;
+    justify-content: space-around;
+    font-size: medium;
+}
+
+#logo {
+    height: 35px;
+    margin-left: 25px;
+}
+
+#logo:hover
+{
+    cursor: pointer;
+}
+
+.navbar-links {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.nv-link {
+    text-decoration: none;
+    color: rgb(115, 115, 115);
+}
+
+.nv-link:hover {
+    color: rgb(200, 200, 200);
+    cursor: pointer;
+}
+
+.connect-wallet {
+    display: flex;
+    margin: 0px 40px 0px 40px;
+    padding: 8px;
+    align-items: center;
+    border-radius: 5px;
+    max-width: 150px;
+}
+
+.connect-wallet-content {
+    overflow-x: hidden;
+    padding: 0px 3px 0px 3px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.btn-custom {
+    border: 2px solid rgb(0, 0, 0);
+    background: rgb(226, 115, 24);
+    background: linear-gradient(130deg, rgb(226, 115, 24) 0%, rgb(194, 58, 13) 100%);
+    transition-duration: 0.2s;
+}
+
+.btn-custom:hover {
+    background: rgb(0, 0, 0);
+    border: 2px solid rgb(226, 115, 24);
+    cursor: pointer;
+}
+
+#HamMenu {
+    display: none;
+}
+
+@media only screen and (max-width: 950px) {
+    .navbar-links {
+        display: none;
+    }
+    #HamMenu {
+        display: flex;
+    }
+    /* Position and sizing of burger button */
+    .bm-burger-button {
+        position: relative;
+        width: 36px;
+        height: 30px;
+        right: 36px;
+        top: 0px;
+    }
+    /* Color/shape of burger icon bars */
+    .bm-burger-bars {
+        background: rgb(255, 183, 48);
+    }
+    /* Color/shape of burger icon bars on hover*/
+    .bm-burger-bars-hover {
+        background: rgb(255, 183, 48);
+    }
+    /* Position and sizing of clickable cross button */
+    .bm-cross-button {
+        height: 24px;
+        width: 24px;
+    }
+    /* Color/shape of close button cross */
+    .bm-cross {
+        display: none;
+    }
+    /*
+  Sidebar wrapper styles
+  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+  */
+    .bm-menu-wrap {
+        position: fixed;
+        height: 100%;
+    }
+    /* General sidebar styles */
+    .bm-menu {
+        background: #000000;
+        padding: 2.5em 1.5em 0;
+        font-size: 1.15em;
+    }
+    /* Morph shape necessary with bubble or elastic */
+    .bm-morph-shape {
+        fill: #373a47;
+    }
+    /* Wrapper for item list */
+    .bm-item-list {
+        color: #ffffff;
+        padding: 0.8em;
+    }
+    /* Individual item */
+    .bm-item {
+        display: inline-block;
+        margin: 15px 0px 15px 0;
+        max-width: 185px;
+    }
+    /* Styling of overlay */
+    .bm-overlay {
+        background: rgba(255, 255, 255);
+    }
+}
