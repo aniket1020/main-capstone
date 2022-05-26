@@ -29,7 +29,7 @@ function Wallet({ loadContracts }) {
         .then((result) => {
           if (!walletAddress)
             axios
-              .post("http://127.0.0.1:5000/connectWallet", {
+              .post(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`+"/connectWallet", {
                 walletId: result[0],
               })
               .then((res) => {

@@ -45,7 +45,7 @@ function UserProfile({ marketplace, nft, account }) {
 
   useEffect(async () => {
     await axios
-      .get("http://127.0.0.1:5000/userProfile/getUser", {
+      .get(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}` + "/userProfile/getUser", {
         params: {
           walletId: walletAddress,
         },
@@ -92,7 +92,7 @@ function UserProfile({ marketplace, nft, account }) {
           src={
             user
               ? user.profileBackgroundImagePath
-                ? "http://127.0.0.1:5000/" + user.profileBackgroundImagePath
+                ? `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/`+user.profileBackgroundImagePath
                 : require("./images/backgroundUserProfileImage.jpeg")
               : require("./images/backgroundUserProfileImage.jpeg")
           }
@@ -110,7 +110,7 @@ function UserProfile({ marketplace, nft, account }) {
             src={
               user
                 ? user.profileImagePath
-                  ? "http://127.0.0.1:5000/" + user.profileImagePath
+                  ? `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/` + user.profileImagePath
                   : require("./images/profileDefault.png")
                 : require("./images/profileDefault.png")
             }

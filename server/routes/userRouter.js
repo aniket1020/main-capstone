@@ -105,15 +105,16 @@ router.post("/userProfile/edit", verifyToken, upload.any(), (req, res) => {
 
       user.profileBackgroundImagePath = null;
     }
-    user.firstName = req.body.firstName == null || req.body.firstName == "" ? req.body.firstName : null;
-    user.lastName = req.body.lastName || req.body.lastName == "" ? req.body.lastName : null;
-    user.userName = req.body.userName || req.body.userName == "" ? req.body.userName : null;
-    user.email = req.body.email || req.body.email == "" ? req.body.email : null;
 
-    user.website = req.body.website || req.body.website == "" ? req.body.website : null;
-    user.facebook = req.body.facebook || req.body.facebook == "" ? req.body.facebook : null;
-    user.twitter = req.body.twitter || req.body.twitter == "" ? req.body.twitter : null;
-    user.instagram = req.body.instagram || req.body.instagram == "" ? req.body.instagram : null;
+    user.firstName = (req.body.firstName || req.body.firstName == "") ? req.body.firstName : null;
+    user.lastName = (req.body.lastName || req.body.lastName == "") ? req.body.lastName : null;
+    user.userName = (req.body.userName || req.body.userName == "") ? req.body.userName : null;
+    user.email = (req.body.email || req.body.email == "") ? req.body.email : null;
+
+    user.website = (req.body.website || req.body.website == "") ? req.body.website : null;
+    user.facebook = (req.body.facebook || req.body.facebook == "") ? req.body.facebook : null;
+    user.twitter = (req.body.twitter || req.body.twitter == "") ? req.body.twitter : null;
+    user.instagram = (req.body.instagram || req.body.instagram == "") ? req.body.instagram : null;
 
     user.save((err, user) => {
       if (err) {
