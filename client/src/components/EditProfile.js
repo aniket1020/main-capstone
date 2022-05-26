@@ -31,7 +31,7 @@ function EditProfile() {
 
   useEffect(async () => {
     await axios
-      .get("http://127.0.0.1:3001/userProfile/getUser", {
+      .get(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`+"/userProfile/getUser", {
         params: {
           walletId: walletAddress,
         },
@@ -41,13 +41,13 @@ function EditProfile() {
 
         if (res.data.user.profileImagePath)
           setProfileImagePath(
-            "http://127.0.0.1:5000/" + res.data.user.profileImagePath
+            `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/` + res.data.user.profileImagePath
           );
         else setProfileImagePath(null);
 
         if (res.data.user.profileBackgroundImagePath)
           setProfileBackgroundImagePath(
-            "http://127.0.0.1:5000/" + res.data.user.profileBackgroundImagePath
+            `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/` + res.data.user.profileBackgroundImagePath
           );
         else setProfileBackgroundImagePath(null);
         setLoading(false);
@@ -277,8 +277,7 @@ function EditProfile() {
                     userData.append("profileImagePath", null);
 
                   if (
-                    document.getElementById("firstName").value !==
-                    user.firstName
+                    document.getElementById("firstName").value !== user.firstName
                   )
                     userData.append(
                       "firstName",
@@ -331,7 +330,7 @@ function EditProfile() {
                     );
 
                   axios
-                    .post("http://127.0.0.1:5000/userProfile/edit", userData, {
+                    .post(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/`+"userProfile/edit", userData, {
                       headers: {
                         "Content-Type": "multipart/form-data",
                         Authorization: "JWT " + jwt,

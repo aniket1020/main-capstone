@@ -35,9 +35,9 @@
     "web3": "^1.7.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-env start",
+    "build": "react-app-env build",
+    "test": "react-app-env test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
-    "hardhat": "^2.9.5"
+    "hardhat": "^2.9.5",
+    "react-app-env": "^1.2.3"
   }
 }

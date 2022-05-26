@@ -8,8 +8,8 @@ import Explore from "./components/Explore";
 import LandingPage from "./components/LandingPage";
 import UploadNft from "./components/UploadNft";
 
-import store from './store';
-import { Provider } from 'react-redux';
+import store from "./store";
+import { Provider } from "react-redux";
 
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
@@ -17,8 +17,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { ethers } from "ethers";
 import NFTAddress from "./contractsData/NFT-address.json";
 import NFTAbi from "./contractsData/NFT.json";
-import MarketplaceAddress from "./contractsData/NFT-address.json";
-import MarketplaceAbi from "./contractsData/NFT.json";
+import MarketplaceAddress from "./contractsData/Marketplace-address.json";
+import MarketplaceAbi from "./contractsData/Marketplace.json";
 
 function App() {
   let persistor = persistStore(store);
@@ -33,11 +33,8 @@ function App() {
       MarketplaceAbi.abi,
       signer
     );
-    
-    const nft = new ethers.Contract(
-        NFTAddress.address, 
-        NFTAbi.abi, signer
-    );
+
+    const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer);
 
     setNftInstance(nft);
     setmarketplaceInstance(marketplace);
@@ -48,12 +45,34 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <div className="App">
           <Routes>
-            <Route exact path='/userProfile' element={<UserProfile />} />
-            <Route exact path='/wallet' element={<Wallet loadContracts={loadContracts} />}/>
-            <Route exact path='/userProfile/edit' element={<EditProfile />} />
-            <Route exact path='/explore' element={<Explore />} />
+            <Route exact path="/userProfile" element={<UserProfile />} />
+            <Route
+              exact
+              path="/wallet"
+              element={<Wallet loadContracts={loadContracts} />}
+            />
+            <Route exact path="/userProfile/edit" element={<EditProfile />} />
+            <Route
+              exact
+              path="/explore"
+              element={
+                <Explore
+                  nftInstance={nftInstance}
+                  marketplaceInstance={marketplaceInstance}
+                />
+              }
+            />
             <Route exact path="/" element={<LandingPage />} />
-            <Route exact path='/upload' element={<UploadNft nftInstance={nftInstance} marketplaceInstance={marketplaceInstance}/>} />
+            <Route
+              exact
+              path="/upload"
+              element={
+                <UploadNft
+                  nftInstance={nftInstance}
+                  marketplaceInstance={marketplaceInstance}
+                />
+              }
+            />
           </Routes>
         </div>
       </PersistGate>

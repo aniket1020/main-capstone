@@ -6,7 +6,7 @@ import { InboxOutlined } from "@ant-design/icons";
 
 import { Row, Form, Button } from "react-bootstrap";
 
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 import { useState } from "react";
 import { ethers } from "ethers";
@@ -20,8 +20,9 @@ const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 const { Dragger } = Upload;
 
 function UploadNft({ nftInstance, marketplaceInstance }) {
-
-  const walletAddress = useSelector((state) => state.user.value ? state.user.value.walletId : null);
+  const walletAddress = useSelector((state) =>
+    state.user.value ? state.user.value.walletId : null
+  );
 
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(null);
@@ -62,11 +63,14 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
     // get tokenId of new nftInstance
     const id = await nftInstance.tokenCount();
     // approve marketplaceInstance to spend nftInstance
-    await (await nftInstance.setApprovalForAll(marketplaceInstance.address, true)).wait();
+    await (
+      await nftInstance.setApprovalForAll(marketplaceInstance.address, true)
+    ).wait();
     // add nftInstance to marketplaceInstance
     const listingPrice = ethers.utils.parseEther(price.toString());
-    await (await marketplaceInstance.makeItem(nftInstance.address, id, listingPrice)).wait();
-
+    await (
+      await marketplaceInstance.makeItem(nftInstance.address, id, listingPrice)
+    ).wait();
   };
 
   return (
@@ -108,7 +112,7 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
         </div>
 
         <div className="d-grid px-0 mt-4">
-          <Button onClick={createNFT} variant="primary" size="lg">
+          <Button className="btn-custom" onClick={createNFT} size="lg">
             Create & List NFT!
           </Button>
         </div>
@@ -203,7 +207,7 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
                 />
               </div>
             </div>
-            <div className="userNftSectionCol">
+            {/* <div className="userNftSectionCol">
               <div className="updateNftSectionButton">
                 <div
                   className="updateProfileButton"
@@ -222,7 +226,7 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
                   Upload Nft
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

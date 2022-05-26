@@ -19,9 +19,9 @@ const cards = {
   0: {
     src: "https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif",
     title: "NFT Monkeys",
-    tags: { 0: "3D", 1: "ART", 2: "AUDIO" },
+    // tags: { 0: "3D", 1: "ART", 2: "AUDIO" },
     price: 4,
-    created: "sanya",
+    // created: "sanya",
     owner: "vijaypatil",
   },
 };
@@ -45,7 +45,7 @@ function UserProfile({ marketplace, nft, account }) {
 
   useEffect(async () => {
     await axios
-      .get("http://127.0.0.1:3001/userProfile/getUser", {
+      .get(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}` + "/userProfile/getUser", {
         params: {
           walletId: walletAddress,
         },
@@ -74,9 +74,9 @@ function UserProfile({ marketplace, nft, account }) {
       <Card
         src={cards[key].src} // For media src
         title={cards[key].title} // NFTCard title
-        tags={cards[key].tags} // NFTCard tags
+        // tags={cards[key].tags} // NFTCard tags
         price={cards[key].price} // NFTCard Price
-        created={cards[key].created} // Creator
+        // created={cards[key].created} // Creator
         owner={cards[key].owner} // Owner
         key={key} // Unique key Id
       />
@@ -92,7 +92,7 @@ function UserProfile({ marketplace, nft, account }) {
           src={
             user
               ? user.profileBackgroundImagePath
-                ? "http://127.0.0.1:3001/" + user.profileBackgroundImagePath
+                ? `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/`+user.profileBackgroundImagePath
                 : require("./images/backgroundUserProfileImage.jpeg")
               : require("./images/backgroundUserProfileImage.jpeg")
           }
@@ -110,7 +110,7 @@ function UserProfile({ marketplace, nft, account }) {
             src={
               user
                 ? user.profileImagePath
-                  ? "http://127.0.0.1:3001/" + user.profileImagePath
+                  ? `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/` + user.profileImagePath
                   : require("./images/profileDefault.png")
                 : require("./images/profileDefault.png")
             }
