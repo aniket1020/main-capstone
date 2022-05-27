@@ -20,9 +20,9 @@ const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 const { Dragger } = Upload;
 
 function UploadNft({ nftInstance, marketplaceInstance }) {
-  const walletAddress = useSelector((state) =>
-    state.user.value ? state.user.value.walletId : null
-  );
+  // const walletAddress = useSelector((state) =>
+  //   state.user.value ? state.user.value.walletId : null
+  // );
 
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(null);
@@ -52,7 +52,25 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
         JSON.stringify({ image, price, name, description })
       );
       mintThenList(result);
+      toast.success("NFT minted successfully", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      });
     } catch (error) {
+      toast.error("Error encountered while minting NFT", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      });
       console.log("ipfs uri upload error: ", error);
     }
   };
@@ -76,6 +94,9 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
   return (
     <>
       <NavBar />
+      <ToastContainer
+        toastStyle={{ backgroundColor: "black", color: "white" }}
+      />
       <div className="UploadNft__Header">
         <div className="UploadNft__Header__row1">
           | <br />
@@ -111,10 +132,10 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
           </Row>
         </div>
 
-        <div className="d-grid px-0 mt-4">
-          <Button className="btn-custom" onClick={createNFT} size="lg">
+        <div className="d-grid px-0 mt-5">
+          <div className="create-nft-btn-custom" onClick={createNFT} size="lg">
             Create & List NFT!
-          </Button>
+          </div>
         </div>
 
         <div className="uploadNftCol">

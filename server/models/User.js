@@ -23,29 +23,15 @@ let userSchema = new Schema(
         },
         userName: {
             type: String,
-            index: {
-                unique: true,
-                partialFilterExpression: { userName: { $type: 'string' } },
-            },
             required: false,
             default: null,
             trim: true,
         },
         email: {
             type: String,
-            index: {
-                unique: true,
-                partialFilterExpression: { email: { $type: 'string' } },
-            },
             lowercase: true,
             trim: true,
             required: false,
-            // validate: {
-            //   validator: function (v) {
-            //     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-            //   },
-            //   message: '{VALUE} is not a valid email!'
-            // }
         },
         profileImagePath: {
             type: String,
@@ -81,7 +67,6 @@ let userSchema = new Schema(
         artwork: {
             type: [{
                 path: String,
-                // trim: true
             }],
             default: []
         },

@@ -1,7 +1,6 @@
 .UploadNft__Header {
   display: flex;
   background-color: black;
-  height: 80vh;
   color: white;
   display: flex;
   flex-direction: column;
@@ -100,7 +99,9 @@
   outline: none;
 }
 
-.btn-custom {
+.create-nft-btn-custom {
+  padding: 15px;
+  border-radius: 10px;
   border: 2px solid rgb(0, 0, 0);
   color: rgb(255, 255, 255, 0.75);
 
@@ -113,7 +114,7 @@
   transition-duration: 0.2s;
 }
 
-.btn-custom:hover {
+.create-nft-btn-custom:hover {
   background: rgb(0, 0, 0);
   border: 2px solid rgb(226, 115, 24);
   cursor: pointer;

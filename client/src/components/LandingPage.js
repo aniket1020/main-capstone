@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Card from "./Card";
@@ -14,6 +14,11 @@ import { DollarOutlined } from "@ant-design/icons";
 import { InboxOutlined } from "@ant-design/icons";
 
 const LandingPage = ({ marketplace, nft }) => {
+
+  // useEffect(() => {
+  //   if(window)
+  // });
+
   return (
     <div className="landing">
       <NavBar />
