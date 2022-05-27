@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import "./css/NFTCardStyles.css";
 import Icon from "@ant-design/icons";
 
@@ -7,7 +7,6 @@ import Image from "react-bootstrap/Image";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { margin } from "@mui/system";
 import Button from "@mui/material/Button";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -39,7 +38,7 @@ function Card(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const propsOwner = props.owner.slice(0, 7) + "...";
-  console.log("Big Number in Modal: ", props.priceInBI);
+  // console.log("Big Number in Modal: ", props.priceInBI);
 
   const loadMarketplaceItems = async () => {
     console.log("NFT Modal instance", props.nft);
@@ -58,7 +57,7 @@ function Card(props) {
 
         // get total price of item ( item price + fee)
         const totalPrice = await props.marketplace.getTotalPrice(item.itemId);
-        console.log(ethers.utils.formatEther(totalPrice));
+        // console.log(ethers.utils.formatEther(totalPrice));
         const totalPriceInETH = ethers.utils.formatEther(totalPrice);
 
         // Add item to items array
@@ -76,11 +75,23 @@ function Card(props) {
   };
 
   const buyMarketplaceItem = async (itemID, itemTotalPrice) => {
-    await (
-      await props.marketplace.purchaseItem(itemID, {
-        value: itemTotalPrice,
-      })
-    ).wait();
+    // await (
+      console.log(itemID, itemTotalPrice);
+      await props.marketplace.purchaseItem(itemID, 
+        {
+          value: itemTotalPrice,
+        }
+      )
+      toast.success("Transaction successful", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      });
+    // ).wait();
     loadMarketplaceItems();
   };
 
@@ -114,45 +125,47 @@ function Card(props) {
                 </div>
               </div>
 
-              <div className="modal-row modal-row-title">
+              {/* <div className="modal-row modal-row-title">
                 <div>
                   <Typography>Owner</Typography>
                 </div>
-                {/* <div>
+                <div>
                   <Typography>createdBy</Typography>
-                </div> */}
-              </div>
+                </div>
+              </div> */}
 
-              <div className="modal-row">
+              {/* <div className="modal-row">
                 <div>
                   <Typography>@{props.owner}</Typography>
                 </div>
-                {/* <div><Typography>@{props.created}</Typography></div> */}
-              </div>
+                <div><Typography>@{props.created}</Typography></div>
+              </div> */}
 
-              {/* <div className="modal-row">
+              {/* 
+                  <div className="modal-row">
                             <div className='cardTags'>
                                 {Object.keys(props.tags).map(tag => <div key={tag} className='cardTag'>{props.tags[tag]}</div>)}
                             </div>
-                        </div> */}
+                  </div> 
+              */}
 
               <div className="modal-row modal-row-title">
                 <div>
-                  <Typography>Address</Typography>
+                  <Typography>Owner</Typography>
                 </div>
               </div>
 
               <div className="modal-row">
                 <div className="modal-address">
                   <Typography fontSize={15}>
-                    0x5FbDB2315678afecb367f032d93F642f64180aa3
+                    {props.owner}
                   </Typography>
                 </div>
                 <CopyOutlined
                   onClick={() => {
-                    if (true) {
+                    if (props.owner) {
                       navigator.clipboard.writeText(
-                        "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+                        props.owner
                       );
                       toast.success("Copied to clipboard successfully", {
                         position: "bottom-center",
@@ -200,10 +213,10 @@ function Card(props) {
               </div>
 
               <div className="modal-row buy-sell">
-                {props.walletAddress ? (
+                {props.walletAddress != props.owner ? (
                   <Button
                     onClick={() =>
-                      buyMarketplaceItem(props.key, props.priceInBI)
+                      buyMarketplaceItem(props.itemId, props.priceInBI)
                     }
                     id="buyButton"
                     variant="contained"

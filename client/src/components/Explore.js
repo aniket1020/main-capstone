@@ -6,12 +6,13 @@ import Card from "./Card";
 import { SearchOutlined } from "@ant-design/icons";
 import { ethers } from "ethers";
 
+import { useSelector } from "react-redux";
+
 function Explore({ nftInstance, marketplaceInstance }) {
-  const [profileBackgroundImage, setBackgroundImage] = useState(null);
-  const [profileImage, setProfileImage] = useState(null);
-  const [profileName, setProfileName] = useState(null);
-  const [userName, setUserName] = useState(null);
-  const [walletAddress, setWalletAddress] = useState(null);
+  
+  const walletAddress = useSelector((state) =>
+    state.user.value ? state.user.value.walletId : null
+  );
 
   const [visibleCards, setVisibleCards] = useState(4);
   const [items, setItems] = useState([]);
@@ -79,6 +80,7 @@ function Explore({ nftInstance, marketplaceInstance }) {
 
   const userCards = items.slice(0, visibleCards).map((item, idx) => (
     <div>
+      {/* {console.log("-->XX",String(item.itemId))} */}
       <Card
         src={item.image} // For media src
         title={item.name} // NFTCard title
@@ -86,10 +88,11 @@ function Explore({ nftInstance, marketplaceInstance }) {
         price={item.totalPriceInETH} // NFTCard Price
         priceInBI={item.totalPrice}
         description={item.description}
-        walletAddress={item.seller}
+        // walletAddress={item.seller}
+        walletAddress={walletAddress}
         // created={cards[key].created} // Creator no need
         owner={item.seller} // Owner no need
-        key={item.itemId} // Unique key Id
+        itemId={item.itemId} // Unique key Id
         nft={nftInstance}
         marketplace={marketplaceInstance}
       />

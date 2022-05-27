@@ -15,16 +15,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 // Temp JSON object for NFT cards
-const cards = {
-  0: {
-    src: "https://miro.medium.com/max/300/1*EZ3xJIkmeVtcdeolOav4PQ.gif",
-    title: "NFT Monkeys",
-    // tags: { 0: "3D", 1: "ART", 2: "AUDIO" },
-    price: 4,
-    // created: "sanya",
-    owner: "vijaypatil",
-  },
-};
+const cards = {};
 
 function UserProfile({ marketplace, nft, account }) {
   const walletAddress = useSelector((state) =>
