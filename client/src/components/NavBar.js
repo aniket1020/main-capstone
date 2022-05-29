@@ -86,6 +86,19 @@ function NavBar() {
             )}
           </div>
           <div className="nv-link">
+            {location.pathname === "/myCollections" ? (
+              "My Collections"
+            ) : (
+              <Link
+                className="nv-link"
+                style={{ textDecoration: "none" }}
+                to="/myCollections"
+              >
+                My Collections
+              </Link>
+            )}
+          </div>
+          <div className="nv-link">
             {location.pathname === "/upload" ? (
               "Create"
             ) : (

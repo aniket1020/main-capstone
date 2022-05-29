@@ -7,6 +7,7 @@ import EditProfile from "./components/EditProfile";
 import Explore from "./components/Explore";
 import LandingPage from "./components/LandingPage";
 import UploadNft from "./components/UploadNft";
+import MyCollections from "./components/MyCollections";
 
 import store from "./store";
 import { Provider } from "react-redux";
@@ -45,7 +46,8 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <div className="App">
           <Routes>
-            <Route exact path="/userProfile" element={<UserProfile />} />
+            <Route exact path="/userProfile" element={<UserProfile nft={nftInstance}
+                  marketplace={marketplaceInstance}/>} />
             <Route
               exact
               path="/wallet"
@@ -62,7 +64,8 @@ function App() {
                 />
               }
             />
-            <Route exact path="/" element={<LandingPage />} />
+            <Route exact path="/" element={<LandingPage nftInstance={nftInstance}
+                  marketplaceInstance={marketplaceInstance} />} />
             <Route
               exact
               path="/upload"
@@ -70,6 +73,16 @@ function App() {
                 <UploadNft
                   nftInstance={nftInstance}
                   marketplaceInstance={marketplaceInstance}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/myCollections"
+              element={
+                <MyCollections
+                  nft={nftInstance}
+                  marketplace={marketplaceInstance}
                 />
               }
             />
