@@ -8,7 +8,7 @@ import { Row, Form, Button } from "react-bootstrap";
 
 import { useSelector } from "react-redux";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ethers } from "ethers";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -29,8 +29,10 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  console.log("nftInstance: ", nftInstance);
-  console.log("marketplaceInstance: ", marketplaceInstance);
+  const imageInputRef = useRef();
+
+  // console.log("nftInstance: ", nftInstance);
+  // console.log("marketplaceInstance: ", marketplaceInstance);
 
   const uploadToIPFS = async (event) => {
     event.preventDefault();
@@ -73,6 +75,11 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
       });
       console.log("ipfs uri upload error: ", error);
     }
+    setName("");
+    setPrice("");
+    setDescription("");
+    imageInputRef.current.value = "";
+    setImage(null);
   };
   const mintThenList = async (result) => {
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
@@ -128,6 +135,7 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
               required
               name="file"
               onChange={uploadToIPFS}
+              ref={imageInputRef}
             />
           </Row>
         </div>
@@ -152,6 +160,7 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
                   id="firstName"
                   className="uploadNftInputField"
                   placeholder="Item Name"
+                  value={name}
                 />
               </div>
             </div>
@@ -183,6 +192,7 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
               <div className="uploadNftInput">
                 <input
                   onChange={(e) => setDescription(e.target.value)}
+                  value={description}
                   required
                   as="textarea"
                   id="bio"
@@ -220,6 +230,7 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
               <div className="userDetailInput">
                 <input
                   onChange={(e) => setPrice(e.target.value)}
+                  value={price}
                   required
                   type="number"
                   id="price"
