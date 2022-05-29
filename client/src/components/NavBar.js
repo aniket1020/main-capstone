@@ -35,15 +35,15 @@ function NavBar() {
       dispatch(setAccessToken(null));
       if (connected) {
         // localStorage.clear();
-        toast.error("Metamask wallet disconnected", {
-          position: "bottom-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-        });
+        // toast.error("Metamask wallet disconnected", {
+        //   position: "bottom-center",
+        //   autoClose: 2000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: false,
+        //   progress: undefined,
+        // });
         connected = false;
       }
     } else {
@@ -94,6 +94,19 @@ function NavBar() {
                 to="/userProfile"
               >
                 Artwork
+              </Link>
+            )}
+          </div>
+          <div className="nv-link">
+            {location.pathname === "/myCollections" ? (
+              "My Collections"
+            ) : (
+              <Link
+                className="nv-link"
+                style={{ textDecoration: "none" }}
+                to="/myCollections"
+              >
+                My Collections
               </Link>
             )}
           </div>

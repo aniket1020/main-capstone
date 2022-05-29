@@ -7,6 +7,7 @@ import EditProfile from "./components/EditProfile";
 import Explore from "./components/Explore";
 import LandingPage from "./components/LandingPage";
 import UploadNft from "./components/UploadNft";
+import MyCollections from "./components/MyCollections";
 
 import store from "./store";
 import { Provider } from "react-redux";
@@ -76,7 +77,11 @@ function App() {
                 />
               }
             />
-            <Route exact path="/" element={<LandingPage />} />
+            <Route exact path="/" element={<LandingPage 
+                              nftInstance={nftInstance}
+                              marketplaceInstance={marketplaceInstance} 
+                              loadContracts={loadContracts}
+                            />} />
             <Route
               exact
               path="/upload"
@@ -85,6 +90,16 @@ function App() {
                   nftInstance={nftInstance}
                   marketplaceInstance={marketplaceInstance}
                   loadContracts={loadContracts}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/myCollections"
+              element={
+                <MyCollections
+                  nftInstance={nftInstance}
+                  marketplaceInstance={marketplaceInstance}
                 />
               }
             />

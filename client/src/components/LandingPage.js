@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Card from "./Card";
@@ -8,22 +8,186 @@ import MetamaskImg from "./images/metamask.jpeg";
 import CoinbaseImg from "./images/coinbase.jpeg";
 import BinanceImg from "./images/binance.png";
 import cyberBrokersImg from "./images/cyberBrokers.svg";
+import Tower from "./images/Tower.jpg";
+import BoredApe1 from "./images/bored_ape.png";
+import KingsOfStreet from "./images/kings_of_street.png";
+import Landscape from "./images/Landscape.jpg";
 import { WalletOutlined } from "@ant-design/icons";
 import { PictureOutlined } from "@ant-design/icons";
 import { DollarOutlined } from "@ant-design/icons";
 import { InboxOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const LandingPage = ({ marketplace, nft }) => {
+import { ethers } from "ethers";
+
+
+const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
+  const walletAddress = useSelector((state) =>
+    state.user.value ? state.user.value.walletId : null
+  );
+
+  const [items, setItems] = useState([]);
+
+  const totalCardsSize = items.length;
+  const loadMarketplaceItems = async () => {
+    console.log("NFT instance", nftInstance);
+    console.log("Marketplace instance", marketplaceInstance);
+    const itemCount = await marketplaceInstance.itemCount();
+    let items = [];
+    for (let i = 1; i <= itemCount; i++) {
+      const item = await marketplaceInstance.items(i);
+      if (!item.sold) {
+        // get uri from nft contract
+        const uri = await nftInstance.tokenURI(item.tokenId);
+
+        // use uri to fetch the nft metadata stored on ipfs
+        const response = await fetch(uri);
+        const metadata = await response.json();
+
+        // get total price of item ( item price + fee)
+        const totalPrice = await marketplaceInstance.getTotalPrice(item.itemId);
+        console.log(ethers.utils.formatEther(totalPrice));
+        console.log(totalPrice);
+        const totalPriceInETH = ethers.utils.formatEther(totalPrice);
+
+        // Add item to items array
+        items.push({
+          totalPriceInETH,
+          totalPrice,
+          itemId: item.itemId,
+          seller: item.seller,
+          name: metadata.name,
+          description: metadata.description,
+          image: metadata.image,
+        });
+      }
+    }
+    const shuffledItems= shuffle(items);
+    setItems(shuffledItems);
+  };
+
+  useEffect(() => {
+    if (nftInstance == null && marketplaceInstance == null)
+    {
+      loadContracts();
+    }
+    loadMarketplaceItems();
+  }, []);
+
+
+  let itemsToDisplay=4;
+  if(items.length<4)itemsToDisplay=items.length;
+
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
+  
+  // const userCards = items.slice(0, itemsToDisplay).map((item, idx) => (
+  //   <div>
+  //     {/* {console.log("-->XX",String(item.itemId))} */}
+  //     <Card
+  //       src={item.image} // For media src
+  //       title={item.name} // NFTCard title
+  //       // tags={cards[key].tags} // NFTCard tags no need
+  //       price={item.totalPriceInETH} // NFTCard Price
+  //       priceInBI={item.totalPrice}
+  //       description={item.description}
+  //       // walletAddress={item.seller}
+  //       walletAddress={walletAddress}
+  //       // created={cards[key].created} // Creator no need
+  //       owner={item.seller} // Owner no need
+  //       itemId={item.itemId} // Unique key Id
+  //       nft={nftInstance}
+  //       marketplace={marketplaceInstance}
+  //     />
+  //     {/* <p>{item.seller}</p> */}
+  //   </div>
+  // ));
+
+  let trendCards= <div></div>
+
+  if(!walletAddress){
+    trendCards=<>
+    <Card
+      src={BoredApe1}
+      tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
+      title="Bored Ape"
+      price={19.8}
+      created="Dhrav"
+      owner="BAYC"
+      key={1234}
+    />
+    <Card
+      src={KingsOfStreet}
+      tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
+      title="Kings of the Street"
+      price={20.02}
+      created="Dhwanit"
+      owner="Aniket"
+      key={1235}
+    />
+    <Card
+      src={Landscape}
+      tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
+      title="Scenery"
+      price={1.98}
+      created="Nomad"
+      owner="stoic"
+      key={1236}
+    />
+    <Card
+      src={Tower}
+      tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
+      title="Landscape"
+      price={1.98}
+      created="Picasso"
+      owner="Jason"
+      key={1237}
+    />
+  </> 
+  }
+  else{
+    
+    trendCards=items.slice(0, itemsToDisplay).map((item, idx) => (
+      <>
+        {/* {console.log("-->XX",String(item.itemId))} */}
+        <Card
+          src={item.image} // For media src
+          title={item.name} // NFTCard title
+          // tags={cards[key].tags} // NFTCard tags no need
+          price={item.totalPriceInETH} // NFTCard Price
+          priceInBI={item.totalPrice}
+          description={item.description}
+          // walletAddress={item.seller}
+          walletAddress={walletAddress}
+          // created={cards[key].created} // Creator no need
+          owner={item.seller} // Owner no need
+          itemId={item.itemId} // Unique key Id
+          nft={nftInstance}
+          marketplace={marketplaceInstance}
+        />
+        {/* <p>{item.seller}</p> */}
+      </>
+    ));
+  }
+
   // useEffect(() => {
   //   if(window)
   // });
-
-  const navigate = useNavigate();
-
-  const handleOnClickExplore = () => {
-    navigate("/explore");
-  };
 
   return (
     <div className="landing">
@@ -80,7 +244,8 @@ const LandingPage = ({ marketplace, nft }) => {
           <h3>Trending Auctions</h3>
         </div>
         <div className="auction-cards">
-          <Card
+        {trendCards}
+          {/* <Card
             src={cyberBrokersImg}
             tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
             title="CyberBrokers"
@@ -115,7 +280,7 @@ const LandingPage = ({ marketplace, nft }) => {
             created="Nomad"
             owner="stoic"
             key={1237}
-          />
+          /> */}
         </div>
       </div>
       <div className="landing-trending">

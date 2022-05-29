@@ -31,7 +31,7 @@ function Explore({ nftInstance, marketplaceInstance, loadContracts }) {
       if (!item.sold) {
         // get uri from nft contract
         const uri = await nftInstance.tokenURI(item.tokenId);
-
+        console.log("URI",uri);
         // use uri to fetch the nft metadata stored on ipfs
         const response = await fetch(uri);
         const metadata = await response.json();
@@ -58,6 +58,7 @@ function Explore({ nftInstance, marketplaceInstance, loadContracts }) {
       setLoadMoreVisible(true);
     }
   };
+  
 
   const buyMarketplaceItem = async (item) => {
     await (

@@ -19,69 +19,62 @@ import axios from "axios";
 import { ethers } from "ethers";
 
 
-function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
-  const [listedItems, setListedItems] = useState([])
-  const [soldItems, setSoldItems] = useState([])
+function MyCollections({ nftInstance,marketplaceInstance }) {
+
   const walletAddress = useSelector((state) =>
     state.user.value ? state.user.value.walletId : null
   );
 
-  // const [visibleCards, setVisibleCards] = useState(4);
-  // const totalCardsSize = Object.keys(cards).length;
-  // let totalCardsSize ;
-  // const isCardsListEmpty = totalCardsSize === 0 ? true : false;
-  // const [loadMoreVisible, setLoadMoreVisible] = useState(
-  //   totalCardsSize <= 4 ? false : true
-  // );
 
+  // console.log("nft:", nft)
+  // console.log("marketplace:", marketplace)
+  const [purchases, setPurchases] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
-  const loadListedItems = async () => {
-    if(walletAddress){
-      // Load all sold items that the user listed
-    const itemCount = await marketplaceInstance.itemCount()
-    let listedItems = []
-    let soldItems = []
-    for (let indx = 1; indx <= itemCount; indx++) {
-      const i = await marketplaceInstance.items(indx)
-      if (i.seller.toLowerCase() === walletAddress) {
+
+  const loadPurchasedItems = async () => {
+    // Fetch purchased items from marketplace by quering Offered events with the buyer set as the user
+    const filter = marketplaceInstance.filters.Bought(
+      null,
+      null,
+      null,
+      null,
+      null,
+      walletAddress
+    );
+    const results = await marketplaceInstance.queryFilter(filter);
+    //Fetch metadata of each nft and add that to listedItem object.
+    const purchases = await Promise.all(
+      results.map(async (i) => {
+        // fetch arguments from each result
+        i = i.args;
         // get uri url from nft contract
-        const uri = await nftInstance.tokenURI(i.tokenId)
-        // use uri to fetch the nft metadata stored on ipfs 
-        const response = await fetch(uri)
-        const metadata = await response.json()
+        const uri = await nftInstance.tokenURI(i.tokenId);
+        // use uri to fetch the nft metadata stored on ipfs
+        const response = await fetch(uri);
+        const metadata = await response.json();
         // get total price of item (item price + fee)
-        const totalPrice = await marketplaceInstance.getTotalPrice(i.itemId)
+        const totalPrice = await marketplaceInstance.getTotalPrice(i.itemId);
         const totalPriceInETH = ethers.utils.formatEther(totalPrice);
         // define listed item object
-        let item = {
+        let purchasedItem = {
           totalPriceInETH,
           price: i.price,
           itemId: i.itemId,
           name: metadata.name,
           description: metadata.description,
-          image: metadata.image
-        }
-        listedItems.push(item)
-        // Add listed item to sold items array if sold
-        if (i.sold) soldItems.push(item)
-      }
-    }
-    setListedItems(listedItems)
-    setSoldItems(soldItems)
-    }
-  }
-
-
-  
+          image: metadata.image,
+        };
+        return purchasedItem;
+      })
+    );
+    setLoading(false);
+    setPurchases(purchases);
+  };
 
   useEffect(async () => {
-    if (nftInstance == null && marketplaceInstance == null)
-    {
-      loadContracts();
-    }
     await axios
       .get(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}` + "/userProfile/getUser", {
         params: {
@@ -92,7 +85,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
         setUser(res.data.user);
         setLoading(false);
       });
-      loadListedItems();
+      loadPurchasedItems();
   }, []);
 
   if (isLoading) {
@@ -101,19 +94,9 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
 
 
  
-  // useEffect(() => {
-  //   loadListedItems()
-  // }, [])
 
-  // const addUserCards = () => {
-  //   setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
 
-  //   if (visibleCards >= totalCardsSize) {
-  //     setLoadMoreVisible(false);
-  //   }
-  // };
-
-  const userCards = listedItems
+  const userCards = purchases
     .map((item,idx) => (
       <Card
         src={item.image} // For media src
@@ -132,23 +115,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
       />
     ));
 
-    const soldCards= soldItems.map((item,idx) =>(
-      <Card
-      src={item.image} // For media src
-      title={item.name} // NFTCard title
-      // tags={cards[key].tags} // NFTCard tags no need
-      price={item.totalPriceInETH} // NFTCard Price
-      priceInBI={item.totalPrice}
-      description={item.description}
-      // walletAddress={item.seller}
-      walletAddress={walletAddress}
-      // created={cards[key].created} // Creator no need
-      owner={walletAddress} // Owner no need
-      itemId={item.itemId} // Unique key Id
-      nft={nftInstance}
-      marketplace={marketplaceInstance}
-      />
-    ));
+    
 
   return (
     <>
@@ -244,7 +211,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
               toastStyle={{ backgroundColor: "black", color: "white" }}
             />
           </div>
-          {walletAddress === user.walletId ? (
+          {/* {walletAddress === user.walletId ? (
             <>
               <div
                 className="id-btn editProfileBtn"
@@ -263,32 +230,18 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
             </>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
       </div>
       <div className="userCollectionFilter">
         <div className="userCollectionFilterOptions">
-          <a className="userCollectionFilters">My Items</a>
-          {/* <a className="userCollectionFilters">Created</a>
-          <a className="userCollectionFilters">Artwork</a>
-          <a className="userCollectionFilters">Liked</a>
-          <a className="userCollectionFilters">History</a> */}
+          <a className="userCollectionFilters">My bought items</a>
         </div>
       </div>
       <div className="userItemSection">
         <div className="userItemCollection">
           {/* User item collection */}
-          {/* {isCardsListEmpty ? (
-            <div style={{ color: "gray", paddingTop: "40px" }}>
-              {" "}
-              😩 No NFTs available
-            </div>
-          ) : (
-            userCards
-          )} */}
-
-
-          {listedItems.length == 0 ? (<div style={{ color: "gray", paddingTop: "40px" }}>
+          {purchases.length == 0 ? (<div style={{ color: "gray", paddingTop: "40px" }}>
               {" "}
               😩 No NFTs to display
             </div>):(
@@ -298,31 +251,14 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
                
               </>
             )}
-        </div>
-        <div className="userCollectionFilter">
-          <div className="userCollectionFilterOptions">
-            <a className="userCollectionFilters">Sold Items</a>
-          </div>
-        </div>
 
-        <div className="userItemCollection">
-        {soldItems.length == 0 ? (<div style={{ color: "gray", paddingTop: "40px" }}>
-              {" "}
-              😩 No NFTs to display
-            </div>):(
-              <>
-              {soldCards}
-              
-               
-              </>
-            )} 
+
+          
         </div>
-      
-        
       </div>
       <Footer />
     </>
   );
 }
 
-export default UserProfile;
+export default MyCollections;
