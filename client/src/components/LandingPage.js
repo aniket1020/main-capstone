@@ -62,7 +62,8 @@ const LandingPage = ({ nftInstance, marketplaceInstance }) => {
         });
       }
     }
-    setItems(items);
+    const shuffledItems= shuffle(items);
+    setItems(shuffledItems);
   };
 
   useEffect(() => {
@@ -73,28 +74,45 @@ const LandingPage = ({ nftInstance, marketplaceInstance }) => {
   let itemsToDisplay=4;
   if(items.length<4)itemsToDisplay=items.length;
 
-
-  const userCards = items.slice(0, itemsToDisplay).map((item, idx) => (
-    <div>
-      {/* {console.log("-->XX",String(item.itemId))} */}
-      <Card
-        src={item.image} // For media src
-        title={item.name} // NFTCard title
-        // tags={cards[key].tags} // NFTCard tags no need
-        price={item.totalPriceInETH} // NFTCard Price
-        priceInBI={item.totalPrice}
-        description={item.description}
-        // walletAddress={item.seller}
-        walletAddress={walletAddress}
-        // created={cards[key].created} // Creator no need
-        owner={item.seller} // Owner no need
-        itemId={item.itemId} // Unique key Id
-        nft={nftInstance}
-        marketplace={marketplaceInstance}
-      />
-      {/* <p>{item.seller}</p> */}
-    </div>
-  ));
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
+  
+  // const userCards = items.slice(0, itemsToDisplay).map((item, idx) => (
+  //   <div>
+  //     {/* {console.log("-->XX",String(item.itemId))} */}
+  //     <Card
+  //       src={item.image} // For media src
+  //       title={item.name} // NFTCard title
+  //       // tags={cards[key].tags} // NFTCard tags no need
+  //       price={item.totalPriceInETH} // NFTCard Price
+  //       priceInBI={item.totalPrice}
+  //       description={item.description}
+  //       // walletAddress={item.seller}
+  //       walletAddress={walletAddress}
+  //       // created={cards[key].created} // Creator no need
+  //       owner={item.seller} // Owner no need
+  //       itemId={item.itemId} // Unique key Id
+  //       nft={nftInstance}
+  //       marketplace={marketplaceInstance}
+  //     />
+  //     {/* <p>{item.seller}</p> */}
+  //   </div>
+  // ));
 
   let trendCards= <div></div>
 
@@ -139,6 +157,7 @@ const LandingPage = ({ nftInstance, marketplaceInstance }) => {
   </> 
   }
   else{
+    
     trendCards=items.slice(0, itemsToDisplay).map((item, idx) => (
       <>
         {/* {console.log("-->XX",String(item.itemId))} */}
