@@ -116,14 +116,12 @@
   cursor: pointer;
 }
 
-.modal-content-section
-{
+.modal-content-section {
   display: flex;
   flex-flow: row;
 }
 
-.modal-col
-{
+.modal-col {
   width: 100%;
   padding: 15px;
   display: flex;
@@ -131,13 +129,11 @@
   align-items: center;
 }
 
-.modal-title
-{
+.modal-title {
   color: rgba(255, 123, 0, 0.879);
 }
 
-.modal-row
-{
+.modal-row {
   margin: 10px 0px 0px 0px;
   color: white;
   display: flex;
@@ -146,8 +142,7 @@
   width: 100%;
 }
 
-.modal-box
-{
+.modal-box {
   width: 1000px;
   position: absolute;
   top: 50%;
@@ -161,69 +156,82 @@
   padding: 15px;
 }
 
-.modal-media
-{
+.modal-media {
   height: 400px;
   width: 400px;
   border-radius: 16px;
 }
 
-.modal-row-title
-{
+.modal-row-title {
   color: rgba(121, 121, 121, 0.885);
 }
 
-.buy-sell
-{
+.buy-sell {
   justify-content: center;
   flex-grow: 1;
   align-items: flex-end;
 }
 
-.onSaleEnabled
-{
+.onSaleEnabled {
   padding: 5px;
   border-radius: 5px;
   background-color: rgba(1, 167, 1, 0.5);
   color: rgba(255, 255, 255, 0.74);
 }
 
-.onSaleDisabled
-{
+.onSaleDisabled {
   padding: 5px;
   border-radius: 5px;
   background-color: rgba(205, 0, 0, 0.5);
   color: rgba(255, 255, 255, 0.74);
 }
 
-.modal-address
-{
+.modal-address {
   border: 1px dashed rgba(255, 255, 255, 0.492);
   padding: 5px;
   border-radius: 5px;
   color: rgba(99, 255, 43, 0.509);
 }
 
-.modal-price
-{
+.modal-price {
   padding: 2px 10px 2px 10px;
   border-radius: 5px;
   border: 1.5px dashed rgb(54, 141, 0);
 }
 
-.modal-eth-logo
-{
+.modal-eth-logo {
   margin: 0px 0px 0px 10px;
 }
 
-#buyButton
-{
+#buyButton {
   width: 60%;
   background-color: green;
 }
 
-#sellButton
-{
+#sellButton {
   width: 60%;
   background-color: red;
+}
+
+.card-buy-sell-btn {
+  margin-top: 7px;
+  padding: 7px;
+  border-radius: 10px;
+  border: 2px solid rgb(0, 0, 0);
+  color: rgb(255, 255, 255, 0.75);
+
+  background: rgb(226, 115, 24);
+  background: linear-gradient(
+    130deg,
+    rgb(226, 115, 24) 0%,
+    rgb(194, 58, 13) 100%
+  );
+  transition-duration: 0.2s;
+}
+
+.card-buy-sell-btn:hover {
+  background: rgb(0, 0, 0);
+  border: 2px solid rgb(226, 115, 24);
+  cursor: pointer;
+  color: rgb(255, 255, 255, 0.75);
 }

@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import { BigNumber, ethers } from "ethers";
 import "./css/NFTCardStyles.css";
 import Icon from "@ant-design/icons";
@@ -35,6 +37,16 @@ function Card(props) {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([]);
 
+  const walletAddress = useSelector((state) =>
+    state.user.value ? state.user.value.walletId : ""
+  );
+
+  const walletAddressLowerCase = walletAddress.toLowerCase();
+
+  const walletAddressCompare = walletAddressLowerCase
+    ? walletAddress.toLowerCase()
+    : "";
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const propsOwner = props.owner.slice(0, 7) + "...";
@@ -43,6 +55,9 @@ function Card(props) {
   const loadMarketplaceItems = async () => {
     // console.log("NFT Modal instance", props.nft);
     // console.log("Marketplace Modal instance", props.marketplace);
+    // console.log("Wallet Address : ", walletAddress);
+    // console.log("Props owner : ", props.owner);
+    // console.log(walletAddress !== props.owner);
     const itemCount = await props.marketplace.itemCount();
     let items = [];
     for (let i = 1; i <= itemCount; i++) {
@@ -75,24 +90,21 @@ function Card(props) {
   };
 
   const buyMarketplaceItem = async (itemID, itemTotalPrice) => {
-    // await (
     // console.log(itemID, itemTotalPrice);
     await (
       await props.marketplace.purchaseItem(itemID, {
         value: itemTotalPrice,
       })
     ).wait();
-    toast.success("Transaction successful", {
-      position: "bottom-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
-      progress: undefined,
-    });
-    // ).wait();
-    handleClose();
+    // toast.success("Transaction successful", {
+    //   position: "bottom-center",
+    //   autoClose: 2000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: false,
+    //   progress: undefined,
+    // });
     loadMarketplaceItems();
   };
 
@@ -213,8 +225,8 @@ function Card(props) {
                 </div>
               </div>
 
-              <div className="modal-row buy-sell">
-                {props.walletAddress != props.owner ? (
+              {/* <div className="modal-row buy-sell">
+                {walletAddress.toLowerCase() !== props.owner.toLowerCase() ? (
                   <Button
                     onClick={() =>
                       buyMarketplaceItem(props.itemId, props.priceInBI)
@@ -229,7 +241,7 @@ function Card(props) {
                     <Typography>Sell</Typography>
                   </Button>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </Box>
@@ -272,6 +284,18 @@ function Card(props) {
         <ToastContainer
           toastStyle={{ backgroundColor: "black", color: "white" }}
         />
+      </div>
+      <div>
+        {walletAddressCompare !== props.owner.toLowerCase() ? (
+          <div
+            className="card-buy-sell-btn"
+            onClick={() => buyMarketplaceItem(props.itemId, props.priceInBI)}
+          >
+            Buy
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
