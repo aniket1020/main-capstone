@@ -12,12 +12,18 @@ import { WalletOutlined } from "@ant-design/icons";
 import { PictureOutlined } from "@ant-design/icons";
 import { DollarOutlined } from "@ant-design/icons";
 import { InboxOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = ({ marketplace, nft }) => {
-
   // useEffect(() => {
   //   if(window)
   // });
+
+  const navigate = useNavigate();
+
+  const handleOnClickExplore = () => {
+    navigate("/explore");
+  };
 
   return (
     <div className="landing">

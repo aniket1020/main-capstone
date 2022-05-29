@@ -9,7 +9,6 @@ import { ethers } from "ethers";
 import { useSelector } from "react-redux";
 
 function Explore({ nftInstance, marketplaceInstance }) {
-  
   const walletAddress = useSelector((state) =>
     state.user.value ? state.user.value.walletId : null
   );
@@ -39,8 +38,6 @@ function Explore({ nftInstance, marketplaceInstance }) {
 
         // get total price of item ( item price + fee)
         const totalPrice = await marketplaceInstance.getTotalPrice(item.itemId);
-        console.log(ethers.utils.formatEther(totalPrice));
-        console.log(totalPrice);
         const totalPriceInETH = ethers.utils.formatEther(totalPrice);
 
         // Add item to items array
@@ -52,10 +49,14 @@ function Explore({ nftInstance, marketplaceInstance }) {
           name: metadata.name,
           description: metadata.description,
           image: metadata.image,
+          sold: item.sold,
         });
       }
     }
     setItems(items);
+    if (items.length > 4) {
+      setLoadMoreVisible(true);
+    }
   };
 
   const buyMarketplaceItem = async (item) => {
@@ -72,6 +73,7 @@ function Explore({ nftInstance, marketplaceInstance }) {
   }, []);
   const addUserCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
+    console.log("Visible cards: ", visibleCards);
 
     if (visibleCards >= totalCardsSize) {
       setLoadMoreVisible(false);
@@ -95,6 +97,7 @@ function Explore({ nftInstance, marketplaceInstance }) {
         itemId={item.itemId} // Unique key Id
         nft={nftInstance}
         marketplace={marketplaceInstance}
+        sold={item.sold}
       />
       {/* <p>{item.seller}</p> */}
     </div>

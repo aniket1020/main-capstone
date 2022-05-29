@@ -71,7 +71,19 @@ function NavBar() {
         )}
 
         <div className="navbar-links">
-          <div className="nv-link">Marketplace</div>
+          <div className="nv-link">
+            {location.pathname === "/" ? (
+              "Marketplace"
+            ) : (
+              <Link
+                className="nv-link"
+                style={{ textDecoration: "none" }}
+                to="/"
+              >
+                Marketplace
+              </Link>
+            )}
+          </div>
           <div className="nv-link">
             {location.pathname === "/userProfile" ? (
               "Artwork"

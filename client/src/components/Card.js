@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BigNumber, ethers } from "ethers";
 import "./css/NFTCardStyles.css";
 import Icon from "@ant-design/icons";
@@ -41,8 +41,8 @@ function Card(props) {
   // console.log("Big Number in Modal: ", props.priceInBI);
 
   const loadMarketplaceItems = async () => {
-    console.log("NFT Modal instance", props.nft);
-    console.log("Marketplace Modal instance", props.marketplace);
+    // console.log("NFT Modal instance", props.nft);
+    // console.log("Marketplace Modal instance", props.marketplace);
     const itemCount = await props.marketplace.itemCount();
     let items = [];
     for (let i = 1; i <= itemCount; i++) {
@@ -76,24 +76,29 @@ function Card(props) {
 
   const buyMarketplaceItem = async (itemID, itemTotalPrice) => {
     // await (
-      console.log(itemID, itemTotalPrice);
-      await props.marketplace.purchaseItem(itemID, 
-        {
-          value: itemTotalPrice,
-        }
-      )
-      toast.success("Transaction successful", {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-      });
+    // console.log(itemID, itemTotalPrice);
+    await (
+      await props.marketplace.purchaseItem(itemID, {
+        value: itemTotalPrice,
+      })
+    ).wait();
+    toast.success("Transaction successful", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
     // ).wait();
+    handleClose();
     loadMarketplaceItems();
   };
+
+  useEffect(() => {
+    loadMarketplaceItems();
+  }, []);
 
   return (
     <>
@@ -113,13 +118,13 @@ function Card(props) {
                   <Typography fontSize={25}># {props.title}</Typography>
                 </div>
                 <div>
-                  {props.onSale ? (
+                  {props.sold ? (
                     <div className="onSaleEnabled">
-                      <Typography>On Sale</Typography>
+                      <Typography> Not on Sale</Typography>
                     </div>
                   ) : (
                     <div className="onSaleDisabled">
-                      <Typography>Not on Sale</Typography>
+                      <Typography>On Sale</Typography>
                     </div>
                   )}
                 </div>
@@ -157,16 +162,12 @@ function Card(props) {
 
               <div className="modal-row">
                 <div className="modal-address">
-                  <Typography fontSize={15}>
-                    {props.owner}
-                  </Typography>
+                  <Typography fontSize={15}>{props.owner}</Typography>
                 </div>
                 <CopyOutlined
                   onClick={() => {
                     if (props.owner) {
-                      navigator.clipboard.writeText(
-                        props.owner
-                      );
+                      navigator.clipboard.writeText(props.owner);
                       toast.success("Copied to clipboard successfully", {
                         position: "bottom-center",
                         autoClose: 2000,
