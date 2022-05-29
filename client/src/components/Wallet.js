@@ -29,9 +29,13 @@ function Wallet({ loadContracts }) {
         .then((result) => {
           if (!walletAddress)
             axios
-              .post(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`+"/connectWallet", {
-                walletId: result[0],
-              })
+              .post(
+                `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}` +
+                  "/connectWallet",
+                {
+                  walletId: result[0],
+                }
+              )
               .then((res) => {
                 dispatch(setAccessToken(res.data.accessToken));
                 dispatch(setUser(res.data.user));
