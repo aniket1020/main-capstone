@@ -36,13 +36,7 @@ function Wallet({ loadContracts }) {
                 dispatch(setAccessToken(res.data.accessToken));
                 dispatch(setUser(res.data.user));
 
-                // Initialize web3 provider and load smart contracts
-                const provider = new ethers.providers.Web3Provider(
-                  window.ethereum
-                );
-                const signer = provider.getSigner();
-
-                loadContracts(signer);
+                loadContracts();
               })
               .catch((err) => console.log(err));
 

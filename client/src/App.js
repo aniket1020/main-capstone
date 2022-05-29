@@ -26,7 +26,14 @@ function App() {
   const [nftInstance, setNftInstance] = useState(null);
   const [marketplaceInstance, setmarketplaceInstance] = useState(null);
 
-  const loadContracts = async (signer) => {
+  const loadContracts = async () => {
+
+    // Initialize web3 provider and load smart contracts
+    const provider = new ethers.providers.Web3Provider(
+      window.ethereum
+    );
+    const signer = provider.getSigner();
+
     // Get deployed copies of contracts
     const marketplace = new ethers.Contract(
       MarketplaceAddress.address,
@@ -45,7 +52,13 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <div className="App">
           <Routes>
-            <Route exact path="/userProfile" element={<UserProfile />} />
+            <Route exact path="/userProfile" 
+            element={<UserProfile 
+                  nftInstance={nftInstance}
+                  marketplaceInstance={marketplaceInstance}
+                  loadContracts={loadContracts}
+                />} 
+            />
             <Route
               exact
               path="/wallet"
@@ -59,6 +72,7 @@ function App() {
                 <Explore
                   nftInstance={nftInstance}
                   marketplaceInstance={marketplaceInstance}
+                  loadContracts={loadContracts}
                 />
               }
             />
@@ -70,6 +84,7 @@ function App() {
                 <UploadNft
                   nftInstance={nftInstance}
                   marketplaceInstance={marketplaceInstance}
+                  loadContracts={loadContracts}
                 />
               }
             />

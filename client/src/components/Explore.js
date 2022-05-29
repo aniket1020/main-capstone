@@ -8,7 +8,7 @@ import { ethers } from "ethers";
 
 import { useSelector } from "react-redux";
 
-function Explore({ nftInstance, marketplaceInstance }) {
+function Explore({ nftInstance, marketplaceInstance, loadContracts }) {
   const walletAddress = useSelector((state) =>
     state.user.value ? state.user.value.walletId : null
   );
@@ -69,6 +69,10 @@ function Explore({ nftInstance, marketplaceInstance }) {
   };
 
   useEffect(() => {
+    if (nftInstance == null && marketplaceInstance == null)
+    {
+      loadContracts();
+    }
     loadMarketplaceItems();
   }, []);
   const addUserCards = () => {

@@ -8,7 +8,7 @@ import { Row, Form, Button } from "react-bootstrap";
 
 import { useSelector } from "react-redux";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ethers } from "ethers";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -19,10 +19,17 @@ const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 const { Dragger } = Upload;
 
-function UploadNft({ nftInstance, marketplaceInstance }) {
+function UploadNft({ nftInstance, marketplaceInstance, loadContracts }) {
   // const walletAddress = useSelector((state) =>
   //   state.user.value ? state.user.value.walletId : null
   // );
+
+  useEffect(() => {
+    if (nftInstance == null && marketplaceInstance == null)
+    {
+      loadContracts();
+    }
+  }, []);
 
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(null);
@@ -31,8 +38,8 @@ function UploadNft({ nftInstance, marketplaceInstance }) {
 
   const imageInputRef = useRef();
 
-  // console.log("nftInstance: ", nftInstance);
-  // console.log("marketplaceInstance: ", marketplaceInstance);
+  console.log("nftInstance: ", nftInstance);
+  console.log("marketplaceInstance: ", marketplaceInstance);
 
   const uploadToIPFS = async (event) => {
     event.preventDefault();

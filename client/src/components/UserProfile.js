@@ -17,7 +17,7 @@ import axios from "axios";
 // Temp JSON object for NFT cards
 const cards = {};
 
-function UserProfile({ marketplace, nft, account }) {
+function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
   const walletAddress = useSelector((state) =>
     state.user.value ? state.user.value.walletId : null
   );
@@ -35,6 +35,10 @@ function UserProfile({ marketplace, nft, account }) {
   const navigate = useNavigate();
 
   useEffect(async () => {
+    if (nftInstance == null && marketplaceInstance == null)
+    {
+      loadContracts();
+    }
     await axios
       .get(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}` + "/userProfile/getUser", {
         params: {
