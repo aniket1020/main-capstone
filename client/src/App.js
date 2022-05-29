@@ -46,8 +46,8 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <div className="App">
           <Routes>
-            <Route exact path="/userProfile" element={<UserProfile nft={nftInstance}
-                  marketplace={marketplaceInstance}/>} />
+            <Route exact path="/userProfile" element={<UserProfile nftInstance={nftInstance}
+                  marketplaceInstance={marketplaceInstance}/>} />
             <Route
               exact
               path="/wallet"
@@ -81,8 +81,8 @@ function App() {
               path="/myCollections"
               element={
                 <MyCollections
-                  nft={nftInstance}
-                  marketplace={marketplaceInstance}
+                  nftInstance={nftInstance}
+                  marketplaceInstance={marketplaceInstance}
                 />
               }
             />

@@ -19,9 +19,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 
 
-function UserProfile({ nft,marketplace }) {
-
-  console.log("nft:", nft)
+function UserProfile({ nftInstance,marketplaceInstance }) {
   const [listedItems, setListedItems] = useState([])
   const [soldItems, setSoldItems] = useState([])
   const walletAddress = useSelector((state) =>
@@ -43,19 +41,19 @@ function UserProfile({ nft,marketplace }) {
   const loadListedItems = async () => {
     if(walletAddress){
       // Load all sold items that the user listed
-    const itemCount = await marketplace.itemCount()
+    const itemCount = await marketplaceInstance.itemCount()
     let listedItems = []
     let soldItems = []
     for (let indx = 1; indx <= itemCount; indx++) {
-      const i = await marketplace.items(indx)
+      const i = await marketplaceInstance.items(indx)
       if (i.seller.toLowerCase() === walletAddress) {
         // get uri url from nft contract
-        const uri = await nft.tokenURI(i.tokenId)
+        const uri = await nftInstance.tokenURI(i.tokenId)
         // use uri to fetch the nft metadata stored on ipfs 
         const response = await fetch(uri)
         const metadata = await response.json()
         // get total price of item (item price + fee)
-        const totalPrice = await marketplace.getTotalPrice(i.itemId)
+        const totalPrice = await marketplaceInstance.getTotalPrice(i.itemId)
         const totalPriceInETH = ethers.utils.formatEther(totalPrice);
         // define listed item object
         let item = {
@@ -125,8 +123,8 @@ function UserProfile({ nft,marketplace }) {
         // created={cards[key].created} // Creator no need
         owner={walletAddress} // Owner no need
         itemId={item.itemId} // Unique key Id
-        nft={nft}
-        marketplace={marketplace}
+        nft={nftInstance}
+        marketplace={marketplaceInstance}
       />
     ));
 
@@ -143,8 +141,8 @@ function UserProfile({ nft,marketplace }) {
       // created={cards[key].created} // Creator no need
       owner={walletAddress} // Owner no need
       itemId={item.itemId} // Unique key Id
-      nft={nft}
-      marketplace={marketplace}
+      nft={nftInstance}
+      marketplace={marketplaceInstance}
       />
     ));
 

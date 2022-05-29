@@ -19,15 +19,15 @@ import axios from "axios";
 import { ethers } from "ethers";
 
 
-function MyCollections({ nft,marketplace }) {
+function MyCollections({ nftInstance,marketplaceInstance }) {
 
   const walletAddress = useSelector((state) =>
     state.user.value ? state.user.value.walletId : null
   );
 
 
-  console.log("nft:", nft)
-  console.log("marketplace:", marketplace)
+  // console.log("nft:", nft)
+  // console.log("marketplace:", marketplace)
   const [purchases, setPurchases] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -36,7 +36,7 @@ function MyCollections({ nft,marketplace }) {
 
   const loadPurchasedItems = async () => {
     // Fetch purchased items from marketplace by quering Offered events with the buyer set as the user
-    const filter = marketplace.filters.Bought(
+    const filter = marketplaceInstance.filters.Bought(
       null,
       null,
       null,
@@ -44,19 +44,19 @@ function MyCollections({ nft,marketplace }) {
       null,
       walletAddress
     );
-    const results = await marketplace.queryFilter(filter);
+    const results = await marketplaceInstance.queryFilter(filter);
     //Fetch metadata of each nft and add that to listedItem object.
     const purchases = await Promise.all(
       results.map(async (i) => {
         // fetch arguments from each result
         i = i.args;
         // get uri url from nft contract
-        const uri = await nft.tokenURI(i.tokenId);
+        const uri = await nftInstance.tokenURI(i.tokenId);
         // use uri to fetch the nft metadata stored on ipfs
         const response = await fetch(uri);
         const metadata = await response.json();
         // get total price of item (item price + fee)
-        const totalPrice = await marketplace.getTotalPrice(i.itemId);
+        const totalPrice = await marketplaceInstance.getTotalPrice(i.itemId);
         const totalPriceInETH = ethers.utils.formatEther(totalPrice);
         // define listed item object
         let purchasedItem = {
@@ -110,8 +110,8 @@ function MyCollections({ nft,marketplace }) {
         // created={cards[key].created} // Creator no need
         owner={walletAddress} // Owner no need
         itemId={item.itemId} // Unique key Id
-        nft={nft}
-        marketplace={marketplace}
+        nft={nftInstance}
+        marketplace={marketplaceInstance}
       />
     ));
 
