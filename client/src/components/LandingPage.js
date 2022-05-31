@@ -29,6 +29,7 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
   );
 
   const [items, setItems] = useState([]);
+  const [sortedItems, setSortedItems] = useState([]);
 
   const loadMarketplaceItems = async () => {
     console.log("NFT instance", nftInstance);
@@ -66,6 +67,7 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
     }
     const shuffledItems= shuffle(items);
     setItems(shuffledItems);
+    setSortedItems((items = items.slice().sort((a, b) => b.tipAmount - a.tipAmount)));
   };
 
   useEffect(() => {
@@ -119,6 +121,76 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
   //     {/* <p>{item.seller}</p> */}
   //   </div>
   // ));
+
+
+  let trendNFTs = <div></div>
+
+  if(!walletAddress){
+    trendNFTs=<>
+    <Card
+      src={BoredApe1}
+      tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
+      title="Bored Ape"
+      price={19.8}
+      created="Dhrav"
+      owner="BAYC"
+      key={1234}
+    />
+    <Card
+      src={KingsOfStreet}
+      tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
+      title="Kings of the Street"
+      price={20.02}
+      created="Dhwanit"
+      owner="Aniket"
+      key={1235}
+    />
+    <Card
+      src={Landscape}
+      tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
+      title="Scenery"
+      price={1.98}
+      created="Nomad"
+      owner="stoic"
+      key={1236}
+    />
+    <Card
+      src={Tower}
+      tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
+      title="Landscape"
+      price={1.98}
+      created="Picasso"
+      owner="Jason"
+      key={1237}
+    />
+  </> 
+  }
+  else{
+    
+    trendNFTs=sortedItems.slice(0, itemsToDisplay).map((item, idx) => (
+      <>
+        {/* {console.log("-->XX",String(item.itemId))} */}
+        <Card
+          src={item.image} // For media src
+          title={item.name} // NFTCard title
+          // tags={cards[key].tags} // NFTCard tags no need
+          price={item.totalPriceInETH} // NFTCard Price
+          priceInBI={item.totalPrice}
+          description={item.description}
+          tipAmount={ethers.utils.formatEther(item.tipAmount)}
+          // walletAddress={item.seller}
+          walletAddress={walletAddress}
+          // created={cards[key].created} // Creator no need
+          owner={item.seller} // Owner no need
+          itemId={item.itemId} // Unique key Id
+          nft={nftInstance}
+          marketplace={marketplaceInstance}
+          actionResponse = {loadMarketplaceItems}
+        />
+        {/* <p>{item.seller}</p> */}
+      </>
+    ));
+  }
 
   let trendCards= <div></div>
 
@@ -293,7 +365,8 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
         <p>--Trending</p>
         <h3>Trending NFT's</h3>
         <div className="trending-cards">
-          <Card
+          {trendNFTs}
+          {/* <Card
             src={cyberBrokersImg}
             tags={{ 0: "3D", 1: "ART", 2: "AUDIO" }}
             title="CyberBrokers"
@@ -328,7 +401,7 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
             created="Nomad"
             owner="stoic"
             key={1241}
-          />
+          /> */}
         </div>
       </div>
       <div className="landing-steps">

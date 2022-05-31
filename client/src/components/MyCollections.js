@@ -32,7 +32,7 @@ function MyCollections({ nftInstance, marketplaceInstance, loadContracts }) {
   const [isLoading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const loadPurchasedItems = async () => {
     // Fetch purchased items from marketplace by quering Offered events with the buyer set as the user

@@ -215,7 +215,7 @@
 }
 
 .card-buy-sell-btn {
-  margin-top: 7px;
+  margin: 10px 10px 10px 10px;
   padding: 7px;
   border-radius: 10px;
   border: 2px solid rgb(0, 0, 0);
@@ -232,7 +232,7 @@
 
 .card-buy-sell-btn:hover {
   background: rgb(0, 0, 0);
-  border: 2px solid rgb(226, 115, 24);
+  border: 2px dashed rgb(226, 115, 24);
   cursor: pointer;
   color: rgb(255, 255, 255, 0.75);
 }
