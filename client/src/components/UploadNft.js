@@ -20,6 +20,8 @@ const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 const { Dragger } = Upload;
 
 function UploadNft({ nftInstance, marketplaceInstance, loadContracts }) {
+
+  //try upload again
   // const walletAddress = useSelector((state) =>
   //   state.user.value ? state.user.value.walletId : null
   // );

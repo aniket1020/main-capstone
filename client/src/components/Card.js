@@ -46,7 +46,9 @@ function Card(props) {
   const walletAddressCompare = walletAddressLowerCase
     ? walletAddress.toLowerCase()
     : "";
+  
 
+ 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const propsOwner = props.owner.slice(0, 7) + "...";
@@ -80,6 +82,7 @@ function Card(props) {
           totalPriceInETH,
           itemId: item.itemId,
           seller: item.seller,
+          tipAmount: item.tipAmount,
           name: metadata.name,
           description: metadata.description,
           image: metadata.image,
@@ -108,6 +111,12 @@ function Card(props) {
     loadMarketplaceItems();
   };
 
+  const tip = async (itemId) => {
+    // tip post owner
+    await (await props.marketplace.tipPostOwner(itemId, { value: ethers.utils.parseEther("0.1") })).wait();
+    loadMarketplaceItems();
+}
+
   useEffect(() => {
     loadMarketplaceItems();
   }, []);
@@ -119,10 +128,16 @@ function Card(props) {
           <div className="modal-content-section">
             <div className="modal-col">
               <Image className="modal-media" src={props.src} />
-              <HeartIcon
+              {/* <HeartIcon
                 style={{ paddingTop: "25px", fontSize: "25px" }}
                 className="heartIcon"
-              />
+              /> */}
+              {walletAddressCompare === props.owner.toLowerCase() || !walletAddress?
+                                        null : <div className="d-inline tipClass float-end">
+                                            <Button onClick={() => tip(props.itemId)} className="px-0 py-0 font-size-16" variant="link" size="md">
+                                                Tip for 0.1 ETH
+                                            </Button>
+                                        </div>}
             </div>
             <div className="modal-col">
               <div className="modal-row">
@@ -247,11 +262,15 @@ function Card(props) {
         </Box>
       </Modal>
 
-      <div key={props.key} className="userItem" onClick={handleOpen}>
+      <div key={props.key} className="userItem">
         <div className="userItemCard">
-          <img className="cardMedia" src={props.src} />
+          <img className="cardMedia" onClick={handleOpen} src={props.src} />
           <div className="cardContent">
-            <HeartIcon className="heartIcon" />
+            {/* <HeartIcon className="heartIcon" /> */}
+            {walletAddressCompare === props.owner.toLowerCase() || !walletAddress ?
+                                        "" : <div className="tip tipClass" onClick={() => tip(props.itemId)}>
+                                            Tip for 0.1 ETH
+                                        </div>}
             <div className="cardRow">
               <div className="cardTitle">{props.title}</div>
               {/* <div className="cardTags">
@@ -284,18 +303,19 @@ function Card(props) {
         <ToastContainer
           toastStyle={{ backgroundColor: "black", color: "white" }}
         />
-        <div>
-        {walletAddressCompare !== props.owner.toLowerCase() ? (
-          <div
-            className="card-buy-sell-btn"
-            onClick={() => buyMarketplaceItem(props.itemId, props.priceInBI)}
-          >
-            Buy
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
+          <div className="tip1">Tip Amount: {props.tipAmount}ETH</div>
+          <div>
+          {walletAddressCompare !== props.owner.toLowerCase() ? (
+            <div
+              className="card-buy-sell-btn"
+              onClick={() => buyMarketplaceItem(props.itemId, props.priceInBI)}
+            >
+              Buy
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </>
   );
