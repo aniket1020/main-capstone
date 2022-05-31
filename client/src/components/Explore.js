@@ -47,6 +47,7 @@ function Explore({ nftInstance, marketplaceInstance, loadContracts }) {
           itemId: item.itemId,
           seller: item.seller,
           name: metadata.name,
+          tipAmount: item.tipAmount,
           description: metadata.description,
           image: metadata.image,
           sold: item.sold,
@@ -95,6 +96,7 @@ function Explore({ nftInstance, marketplaceInstance, loadContracts }) {
         price={item.totalPriceInETH} // NFTCard Price
         priceInBI={item.totalPrice}
         description={item.description}
+        tipAmount={ethers.utils.formatEther(item.tipAmount)}
         // walletAddress={item.seller}
         walletAddress={walletAddress}
         // created={cards[key].created} // Creator no need

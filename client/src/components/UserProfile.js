@@ -61,6 +61,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
             price: i.price,
             itemId: i.itemId,
             name: metadata.name,
+            tipAmount:i.tipAmount,
             description: metadata.description,
             image: metadata.image
           }
@@ -121,6 +122,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
         price={item.totalPriceInETH} // NFTCard Price
         priceInBI={item.totalPrice}
         description={item.description}
+        tipAmount={ethers.utils.formatEther(item.tipAmount)}
         // walletAddress={item.seller}
         walletAddress={walletAddress}
         // created={cards[key].created} // Creator no need
@@ -139,6 +141,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
       price={item.totalPriceInETH} // NFTCard Price
       priceInBI={item.totalPrice}
       description={item.description}
+      tipAmount={ethers.utils.formatEther(item.tipAmount)}
       // walletAddress={item.seller}
       walletAddress={walletAddress}
       // created={cards[key].created} // Creator no need

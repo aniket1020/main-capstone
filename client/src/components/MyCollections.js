@@ -42,6 +42,7 @@ function MyCollections({ nftInstance,marketplaceInstance }) {
       null,
       null,
       null,
+      null,
       walletAddress
     );
     const results = await marketplaceInstance.queryFilter(filter);
@@ -58,15 +59,18 @@ function MyCollections({ nftInstance,marketplaceInstance }) {
         // get total price of item (item price + fee)
         const totalPrice = await marketplaceInstance.getTotalPrice(i.itemId);
         const totalPriceInETH = ethers.utils.formatEther(totalPrice);
+        // const tipAmountInETH = ethers.utils.formatEther(i.tipAmount);
         // define listed item object
         let purchasedItem = {
           totalPriceInETH,
           price: i.price,
           itemId: i.itemId,
           name: metadata.name,
+          tipAmount: i.tipAmount,
           description: metadata.description,
           image: metadata.image,
         };
+        console.log(i.tipAmount);
         return purchasedItem;
       })
     );
@@ -89,7 +93,7 @@ function MyCollections({ nftInstance,marketplaceInstance }) {
   }, []);
 
   if (isLoading) {
-    return <div className="App">Loading...</div>;
+    return <div className="App">Loading...(Please connect wallet to view this page)</div>;
   }
 
 
@@ -105,6 +109,7 @@ function MyCollections({ nftInstance,marketplaceInstance }) {
         price={item.totalPriceInETH} // NFTCard Price
         priceInBI={item.totalPrice}
         description={item.description}
+        tipAmount={ethers.utils.formatEther(item.tipAmount)}
         // walletAddress={item.seller}
         walletAddress={walletAddress}
         // created={cards[key].created} // Creator no need
