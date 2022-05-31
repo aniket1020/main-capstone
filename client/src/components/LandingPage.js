@@ -74,7 +74,7 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
       loadContracts();
     }
     loadMarketplaceItems();
-  }, []);
+  }, [nftInstance, marketplaceInstance]);
 
 
   let itemsToDisplay=4;

@@ -100,6 +100,7 @@ function App() {
                 <MyCollections
                   nftInstance={nftInstance}
                   marketplaceInstance={marketplaceInstance}
+                  loadContracts={loadContracts}
                 />
               }
             />

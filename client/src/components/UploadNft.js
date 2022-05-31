@@ -31,7 +31,7 @@ function UploadNft({ nftInstance, marketplaceInstance, loadContracts }) {
     {
       loadContracts();
     }
-  }, []);
+  }, [nftInstance, marketplaceInstance]);
 
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(null);

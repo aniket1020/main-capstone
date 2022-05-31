@@ -93,7 +93,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
         setLoading(false);
       });
     loadListedItems();
-  }, []);
+  }, [nftInstance, marketplaceInstance]);
 
   if (isLoading) {
     return <div className="App">Loading...</div>;

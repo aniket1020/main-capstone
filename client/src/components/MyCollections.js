@@ -19,7 +19,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 
 
-function MyCollections({ nftInstance,marketplaceInstance }) {
+function MyCollections({ nftInstance, marketplaceInstance, loadContracts }) {
 
   const walletAddress = useSelector((state) =>
     state.user.value ? state.user.value.walletId : null
@@ -79,6 +79,9 @@ function MyCollections({ nftInstance,marketplaceInstance }) {
   };
 
   useEffect(async () => {
+    if (nftInstance == null && marketplaceInstance == null) {
+      loadContracts();
+    }
     await axios
       .get(`${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}` + "/userProfile/getUser", {
         params: {
@@ -90,7 +93,7 @@ function MyCollections({ nftInstance,marketplaceInstance }) {
         setLoading(false);
       });
       loadPurchasedItems();
-  }, []);
+  }, [nftInstance, marketplaceInstance]);
 
   if (isLoading) {
     return <div className="App">Loading...(Please connect wallet to view this page)</div>;
