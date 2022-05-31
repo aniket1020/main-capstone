@@ -182,6 +182,7 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
           itemId={item.itemId} // Unique key Id
           nft={nftInstance}
           marketplace={marketplaceInstance}
+          actionResponse = {loadMarketplaceItems}
         />
         {/* <p>{item.seller}</p> */}
       </>

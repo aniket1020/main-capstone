@@ -61,7 +61,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
             price: i.price,
             itemId: i.itemId,
             name: metadata.name,
-            tipAmount:i.tipAmount,
+            tipAmount: i.tipAmount,
             description: metadata.description,
             image: metadata.image
           }
@@ -113,6 +113,8 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
   //   }
   // };
 
+  const loadMarketplaceItems = async () => {};
+
   const userCards = listedItems
     .map((item, idx) => (
       <Card
@@ -130,6 +132,7 @@ function UserProfile({ nftInstance, marketplaceInstance, loadContracts }) {
         itemId={item.itemId} // Unique key Id
         nft={nftInstance}
         marketplace={marketplaceInstance}
+        actionResponse={loadMarketplaceItems}
       />
     ));
 

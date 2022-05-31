@@ -27,8 +27,7 @@ function UploadNft({ nftInstance, marketplaceInstance, loadContracts }) {
   // );
 
   useEffect(() => {
-    if (nftInstance == null && marketplaceInstance == null)
-    {
+    if (nftInstance == null && marketplaceInstance == null) {
       loadContracts();
     }
   }, [nftInstance, marketplaceInstance]);
@@ -39,9 +38,6 @@ function UploadNft({ nftInstance, marketplaceInstance, loadContracts }) {
   const [description, setDescription] = useState("");
 
   const imageInputRef = useRef();
-
-  console.log("nftInstance: ", nftInstance);
-  console.log("marketplaceInstance: ", marketplaceInstance);
 
   const uploadToIPFS = async (event) => {
     event.preventDefault();
@@ -56,6 +52,7 @@ function UploadNft({ nftInstance, marketplaceInstance, loadContracts }) {
       }
     }
   };
+
   const createNFT = async () => {
     if (!image || !price || !name || !description) return;
     try {

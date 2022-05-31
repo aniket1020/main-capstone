@@ -22,16 +22,16 @@ const HeartSvg = () => (
   </svg>
 );
 
-const HeartIcon = (props) => (
-  <Icon
-    component={HeartSvg}
-    onClick={(e) =>
-      (e.target.style.color =
-        e.target.style.color === "gray" ? "hotpink" : "gray")
-    }
-    {...props}
-  />
-);
+// const HeartIcon = (props) => (
+//   <Icon
+//     component={HeartSvg}
+//     onClick={(e) =>
+//       (e.target.style.color =
+//         e.target.style.color === "gray" ? "hotpink" : "gray")
+//     }
+//     {...props}
+//   />
+// );
 
 function Card(props) {
   const [open, setOpen] = useState(false);
@@ -54,44 +54,6 @@ function Card(props) {
   const propsOwner = props.owner.slice(0, 7) + "...";
   // console.log("Big Number in Modal: ", props.priceInBI);
 
-  const loadMarketplaceItems = async () => {
-    // console.log("NFT Modal instance", props.nft);
-    // console.log("Marketplace Modal instance", props.marketplace);
-    // console.log("Wallet Address : ", walletAddress);
-    // console.log("Props owner : ", props.owner);
-    // console.log(walletAddress !== props.owner);
-    const itemCount = await props.marketplace.itemCount();
-    let items = [];
-    for (let i = 1; i <= itemCount; i++) {
-      const item = await props.marketplace.items(i);
-      if (!item.sold) {
-        // get uri from nft contract
-        const uri = await props.nft.tokenURI(item.tokenId);
-
-        // use uri to fetch the nft metadata stored on ipfs
-        const response = await fetch(uri);
-        const metadata = await response.json();
-
-        // get total price of item ( item price + fee)
-        const totalPrice = await props.marketplace.getTotalPrice(item.itemId);
-        // console.log(ethers.utils.formatEther(totalPrice));
-        const totalPriceInETH = ethers.utils.formatEther(totalPrice);
-
-        // Add item to items array
-        items.push({
-          totalPriceInETH,
-          itemId: item.itemId,
-          seller: item.seller,
-          tipAmount: item.tipAmount,
-          name: metadata.name,
-          description: metadata.description,
-          image: metadata.image,
-        });
-      }
-    }
-    setItems(items);
-  };
-
   const buyMarketplaceItem = async (itemID, itemTotalPrice) => {
     // console.log(itemID, itemTotalPrice);
     await (
@@ -108,18 +70,18 @@ function Card(props) {
     //   draggable: false,
     //   progress: undefined,
     // });
-    loadMarketplaceItems();
+    props.actionResponse();
   };
 
   const tip = async (itemId) => {
     // tip post owner
     await (await props.marketplace.tipPostOwner(itemId, { value: ethers.utils.parseEther("0.1") })).wait();
-    loadMarketplaceItems();
+    props.actionResponse();
 }
 
-  useEffect(() => {
-    loadMarketplaceItems();
-  }, []);
+  // useEffect(() => {
+  //   props.actionResponse();
+  // }, []);
 
   return (
     <>

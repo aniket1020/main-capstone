@@ -13,7 +13,7 @@ import { CopyOutlined, EditOutlined, SettingOutlined } from "@ant-design/icons";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {Row,Col} from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { ethers } from "ethers";
@@ -92,7 +92,7 @@ function MyCollections({ nftInstance, marketplaceInstance, loadContracts }) {
         setUser(res.data.user);
         setLoading(false);
       });
-      loadPurchasedItems();
+    loadPurchasedItems();
   }, [nftInstance, marketplaceInstance]);
 
   if (isLoading) {
@@ -100,11 +100,11 @@ function MyCollections({ nftInstance, marketplaceInstance, loadContracts }) {
   }
 
 
- 
+  const loadMarketplaceItems = async () => {};
 
 
   const userCards = purchases
-    .map((item,idx) => (
+    .map((item, idx) => (
       <Card
         src={item.image} // For media src
         title={item.name} // NFTCard title
@@ -120,10 +120,11 @@ function MyCollections({ nftInstance, marketplaceInstance, loadContracts }) {
         itemId={item.itemId} // Unique key Id
         nft={nftInstance}
         marketplace={marketplaceInstance}
+        actionResponse={loadMarketplaceItems}
       />
     ));
 
-    
+
 
   return (
     <>
@@ -135,7 +136,7 @@ function MyCollections({ nftInstance, marketplaceInstance, loadContracts }) {
           src={
             user
               ? user.profileBackgroundImagePath
-                ? `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/`+user.profileBackgroundImagePath
+                ? `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/` + user.profileBackgroundImagePath
                 : require("./images/backgroundUserProfileImage.jpeg")
               : require("./images/backgroundUserProfileImage.jpeg")
           }
@@ -250,18 +251,18 @@ function MyCollections({ nftInstance, marketplaceInstance, loadContracts }) {
         <div className="userItemCollection">
           {/* User item collection */}
           {purchases.length == 0 ? (<div style={{ color: "gray", paddingTop: "40px" }}>
-              {" "}
-              😩 No NFTs to display
-            </div>):(
-              <>
+            {" "}
+            😩 No NFTs to display
+          </div>) : (
+            <>
               {userCards}
-              
-               
-              </>
-            )}
 
 
-          
+            </>
+          )}
+
+
+
         </div>
       </div>
       <Footer />

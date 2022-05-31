@@ -70,14 +70,14 @@ function Explore({ nftInstance, marketplaceInstance, loadContracts }) {
   };
   
 
-  const buyMarketplaceItem = async (item) => {
-    await (
-      await marketplaceInstance.purchaseItem(item.itemId, {
-        value: item.totalPrice,
-      })
-    ).wait();
-    loadMarketplaceItems();
-  };
+  // const buyMarketplaceItem = async (item) => {
+  //   await (
+  //     await marketplaceInstance.purchaseItem(item.itemId, {
+  //       value: item.totalPrice,
+  //     })
+  //   ).wait();
+  //   loadMarketplaceItems();
+  // };
 
   const addUserCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
@@ -107,6 +107,7 @@ function Explore({ nftInstance, marketplaceInstance, loadContracts }) {
         nft={nftInstance}
         marketplace={marketplaceInstance}
         sold={item.sold}
+        actionResponse = {loadMarketplaceItems}
       />
       {/* <p>{item.seller}</p> */}
     </div>
