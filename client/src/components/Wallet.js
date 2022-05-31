@@ -12,8 +12,6 @@ import { useSelector } from "react-redux";
 import { setUser } from "../features/userSlice";
 import { setAccessToken } from "../features/accessTokenSlice";
 
-import { ethers } from "ethers";
-
 function Wallet({ loadContracts }) {
   const walletAddress = useSelector((state) =>
     state.user.value ? state.user.value.walletId : null

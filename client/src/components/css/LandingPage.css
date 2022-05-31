@@ -54,6 +54,11 @@ a:hover {
   background-color: rgb(226, 115, 24);
 }
 
+#alt-button:hover
+{
+  color: rgb(0, 87, 16);
+}
+
 .landing-wallets {
   margin-top: 30px;
   text-align: left;
