@@ -318,8 +318,8 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
       </div>
       <div className="landing-auctions">
         <div className="landing-auctions__text">
-          <p>--Live Auction</p>
-          <h3>Trending Auctions</h3>
+          <p>--Live NFTs</p>
+          <h3>Explore NFTs</h3>
         </div>
         <div className="auction-cards">
         {trendCards}

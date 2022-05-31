@@ -104,7 +104,7 @@ function Wallet({ loadContracts }) {
               ></img>
               <div className="walletName">Metamask</div>
             </div>
-            <div className="wallet">
+            {/* <div className="wallet">
               <img
                 className="walletImage"
                 src={require("./images/coinbase.png")}
@@ -119,7 +119,7 @@ function Wallet({ loadContracts }) {
                 alt=""
               ></img>
               <div className="walletName">Binance</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
