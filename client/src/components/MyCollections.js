@@ -235,7 +235,7 @@ function MyCollections({ nftInstance,marketplaceInstance }) {
       </div>
       <div className="userCollectionFilter">
         <div className="userCollectionFilterOptions">
-          <a className="userCollectionFilters">My bought items</a>
+          <a className="userCollectionFilters">BOUGHT</a>
         </div>
       </div>
       <div className="userItemSection">

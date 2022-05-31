@@ -18,6 +18,8 @@ import { DollarOutlined } from "@ant-design/icons";
 import { InboxOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 
+import { Link } from 'react-router-dom';
+
 import { ethers } from "ethers";
 
 
@@ -28,7 +30,6 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
 
   const [items, setItems] = useState([]);
 
-  const totalCardsSize = items.length;
   const loadMarketplaceItems = async () => {
     console.log("NFT instance", nftInstance);
     console.log("Marketplace instance", marketplaceInstance);
@@ -198,10 +199,12 @@ const LandingPage = ({ nftInstance, marketplaceInstance, loadContracts }) => {
           <h1 id="alt-text">NFT World</h1>
           <p>Collect and Sell your Extraordinary Artwork.</p>
           <div className="landing-cover__buttons">
-            <a id="alt-button" href="/">
+            <Link id="alt-button" to='/'>
               Explore
-            </a>
-            <a href="/">Upload</a>
+            </Link>
+            <Link id="landing-feed-btn" to='/explore'>
+              Feed
+            </Link>
           </div>
         </div>
         <div className="landing-cover-right">

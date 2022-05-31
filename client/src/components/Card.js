@@ -284,8 +284,7 @@ function Card(props) {
         <ToastContainer
           toastStyle={{ backgroundColor: "black", color: "white" }}
         />
-      </div>
-      <div>
+        <div>
         {walletAddressCompare !== props.owner.toLowerCase() ? (
           <div
             className="card-buy-sell-btn"
@@ -296,6 +295,7 @@ function Card(props) {
         ) : (
           ""
         )}
+      </div>
       </div>
     </>
   );

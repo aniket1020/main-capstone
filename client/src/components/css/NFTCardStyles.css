@@ -13,6 +13,7 @@
   color: rgb(255, 255, 255, 0.75);
   border: 1.5px solid black;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   width: fit-content;
 }
@@ -219,7 +220,7 @@
   border-radius: 10px;
   border: 2px solid rgb(0, 0, 0);
   color: rgb(255, 255, 255, 0.75);
-
+  text-align: center;
   background: rgb(226, 115, 24);
   background: linear-gradient(
     130deg,
